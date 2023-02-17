@@ -11,11 +11,11 @@ const Home = () => {
 
     return (
       < HomeContainer>
-      
+  
         <Nav />
         <HomeItems />
         <Footer />
-        
+      
         </ HomeContainer>
     )
 

@@ -42,13 +42,16 @@ gap:3em;
 `
 const Logo = styled.h1`
 text-align:center;
+font-size:1.5em;
 `
 
 const FooterPara = styled.p`
 font-size:1rem;
 font-weight:bold;`
 
-const FooterLink=styled.div``
+const FooterLink = styled.li`
+list-style-type:none;
+font-size:1rem;`
 
 
 const Footer = () => {
@@ -58,9 +61,10 @@ const Footer = () => {
             <FooterUl>
                 <Logo className="fontFamily"><Link to="/">Stuhome</Link> </Logo>
                 
-        <FooterLink>About</FooterLink>
-        <FooterLink>Contact</FooterLink>
-                
+        <Link to='/about'><FooterLink>About</FooterLink></Link>
+        <Link to='/contact'> <FooterLink>Contact</FooterLink></Link>
+        <Link to='/details'> <FooterLink>Details</FooterLink></Link>
+
 
       </FooterUl>
 
