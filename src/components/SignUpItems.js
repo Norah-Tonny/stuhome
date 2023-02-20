@@ -120,7 +120,7 @@ const SignUpItems = () => {
     
           else {
     
-            await addDoc(collection(db, "userSignUp"), values);
+            await addDoc(collection(db, "user"), values);
             setValues({
               FirstName: "",
               LastName: "",

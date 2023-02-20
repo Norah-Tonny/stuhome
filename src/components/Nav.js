@@ -51,6 +51,7 @@ const Nav = () => {
     return (
         <NavContainer>
             <InnerNav>
+
                 <NavLeft>
                     <LogoContainer>
 
@@ -61,8 +62,8 @@ const Nav = () => {
                         </LogoContainer>
             </NavLeft>
           
-
                 <NavRight>
+
                     <NavUl>
 <NavList> <Link to="/listing">Listing</Link></NavList>
   <NavList> <Link to="/login">Login</Link></NavList>

@@ -123,17 +123,12 @@ const LoginItems = () => {
       if(values.email===""){
        setError(prev=>({...prev, emailError:"Enter your email" }))
       }
-       if (values.password === "") {
+       
+    else if (values.password === ""){
         setError(prev=>({ ...prev, passwordError: "Enter your password" }));
     } 
        
-    else {  await addDoc(collection(db, "userLogin"), values);
-           setValues({
-         username:"",
-       email: "",
-      password: "",
-
-     });
+  else { 
       console.log(error);
 
    }
