@@ -38,14 +38,14 @@ const Contact = () => {
         <ContactHeading>Let's Talk!</ContactHeading>
           <ContactPara>Get in touch with us using the contact details  below.</ContactPara>
        
-              
           <Inputs>
         <ContactInput type="text" placeholder="Username" />
         <ContactInput type="text" placeholder="email" />
         <ContactInput type="number" placeholder="Phone Number"/>
         <ContactSubject type="message" placeholder="Subject" ></ContactSubject>
         <ContactButton>Submit</ContactButton>
-              </Inputs>
+        </Inputs>
+        
               </ContactDetails>
           
           <Footer />
