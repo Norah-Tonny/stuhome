@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import AboutItems from "../components/AboutItems";
+import NewsLetter from "../components/Newsletter"
 const AboutContainer=styled.div``    
 
 
@@ -10,10 +11,10 @@ const About = () => {
     return(
     <AboutContainer>
         <Nav />
-        <AboutItems/>
+            <AboutItems />
        <Footer/>
         </AboutContainer>
-        )
+    )
     
 }
 export default About;

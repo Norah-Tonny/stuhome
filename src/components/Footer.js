@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom"
 import styled from "styled-components"
+import EmailIcon from '@mui/icons-material/Email';
+import FacebookIcon from '@mui/icons-material/Facebook';
 
 const FooterContainer = styled.div`
 background:#CD5888;
@@ -32,6 +34,9 @@ height:160px;
 border-radius:50%;
 
 `
+
+const Atag=styled.a``
+
 const FooterLogo=styled.div``
 
 const MaterianUl=styled.div`
@@ -63,7 +68,6 @@ const Footer = () => {
                 
         <Link to='/about'><FooterLink>About</FooterLink></Link>
         <Link to='/contact'> <FooterLink>Contact</FooterLink></Link>
-        <Link to='/details'> <FooterLink>Details</FooterLink></Link>
 
 
       </FooterUl>
@@ -72,7 +76,7 @@ const Footer = () => {
       <FooterHeading>
      Information
        </FooterHeading>
-        <FooterLink>Host your stuhome</FooterLink>
+        <FooterLink to= '/'>Host your stuhome</FooterLink>
         <FooterLink>Instant Mockups</FooterLink>
      
             </FooterUl>
@@ -92,6 +96,9 @@ const Footer = () => {
       <FooterHeading>
        Connect with us
           </FooterHeading>
+          <Link href='email'> <FooterLink>< EmailIcon/></FooterLink></Link>
+          <Atag href='facebook.com'> <FooterLink>< FacebookIcon /></FooterLink></Atag>
+
       </FooterUl>
      
     </FooterContainer>

@@ -9,6 +9,7 @@ const HelpContent=styled.div``
 const HelpContainer = styled.div`
 display:flex;
 flex:row;
+gap:5em;
 margin:0 auto;
 `
 const HelpText = styled.div`
@@ -20,27 +21,31 @@ const HelpHeading = styled.h4`
 const Para = styled.p`
 `
 const HelpPara = styled.p`
+
 `
 
-const HelpBackground = styled.div`
-// background-image :url('https://images.pexels.com/photos/4134791/pexels-photo-4134791.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1https://images.pexels.com/photos/4134791/pexels-photo-4134791.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1https://images.pexels.com/photos/4134791/pexels-photo-4134791.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
-// background-repeat:no-repeat;
-// background-size:cover;
-// background-position:center;
-// text-align:center;
-// margin:0 auto;
-width:50%;
-`
+
+const HelpDetails = styled.div`
+background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)),url("https://images.pexels.com/photos/9420758/pexels-photo-9420758.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"); 
+background-repeat: no repeat;
+ background-size: cover;                                                                                                                                                               
+width: 50%;
+height:50vh;
+
+`   
+const HelpParagraph=styled.div``
+
 const Help = () => {
   return (
       <Container>
          <Nav />
     <HelpContainer>
-            <HelpBackground>
-          <img style={{width:"50%",height:"50%"}} src='https://www.pexels.com/photo/white-wooden-bed-frame-near-white-window-curtain-5137980/'/>
-       </HelpBackground>
+               
+      <HelpDetails>
+        <HelpParagraph></HelpParagraph>
 
-        
+</HelpDetails>
+
         <HelpText>
           <HelpContent>
           <HelpHeading>What is Stuhome?</HelpHeading>
@@ -48,7 +53,6 @@ const Help = () => {
         <HelpPara>who are in need of hostels to the available hostels around them</HelpPara>
         </HelpContent>
 
-        
         <HelpContent>
      <HelpHeading>How does Stuhome works?</HelpHeading>
     <HelpPara>Stuhome is an online platform that specializes in student accommodation.</HelpPara>
@@ -59,12 +63,13 @@ const Help = () => {
 
         <HelpContent>
             <HelpHeading>What is the verifications?</HelpHeading>
-    <HelpPara>It provides the student with the available hostels arou </HelpPara>
+    <HelpPara>It provides the student with the available hostels around their places. </HelpPara>
           </HelpContent>
           </HelpText>
 
 
-    </HelpContainer> 
+      </HelpContainer> 
+
           <Footer/>
       </Container>
       

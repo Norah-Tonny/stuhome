@@ -5,36 +5,62 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import { StyledEngineProvider } from "@mui/material";
-import { Contrast } from "@mui/icons-material";
+
+
+
+
 
 const LoginContainer = styled.div`
-margin:2em 10em;
+background:whitesmoke;
 justify-content:space-around;
 text-align:center;
-border-radius:5px;
-`;
+paddingborder-radius:5px;
+display: flex; 
+justify-content: space-between;
+ gap: 2em; 
+ padding: 1em;
+  width: 85%;
+   margin: 0 auto;
+ `;
+
+const LoginDetails = styled.div`
+width:30%;
+`
 const LoginHeading = styled.h1`
 font-size:1.5rem;
 font-weight:bold;
-margin-bottom:2em;`;
-
+margin-bottom:2em;`
+const Paragraph = styled.p``;
+const LoginLeft = styled.div`
+background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)),url("https://images.pexels.com/photos/4217/hotel-bed-bedroom-room.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"); 
+background-repeat: no repeat;
+ background-size: cover;                                                                                                                                                               
+width: 50%;
+height:50vh;
+ font-size: 3rem;
+ color:#CD5888;
+  font-weight: bold; 
+  display: flex;
+   flex-direction: column;
+    justify-content: center; 
+  `
 const Inputs = styled.div`
 display:flex;
 flex-direction:column;
 align-items:center;
-gap:2em;
+gap:3em;
 `
 
 const PasswordContainer = styled.div`
 box-shadow:0 0 3px 1px gray;
-width:30%;
+width:100%;
 border-radius:5px;
-padding:1.3em;
+padding:.9em;
 `
 
 const PasswordInput = styled.input`
- width: 100%;
+ width: 150%;
+ background:whitesmoke;
   outline: none;
    border:none;
     `
@@ -47,7 +73,7 @@ height: fit-content;
 
 const InputShowFlex = styled.div`
 display: flex; 
-// align-items: center;
+align-items: center;
 width:100%;
 `
 
@@ -57,11 +83,16 @@ font-size:1rem;
 curser:pointer;
 background:#CD5888;
 border-radius:5px;
-border:none;`
+border:none;
+width:110%;
+`
 
 const LoginInputs = styled.input`
-padding:2em;
-width:30%;
+width:100%;
+border:none;
+box-shadow:0 0 3px 1px gray;
+border-radius:5px;
+padding:1.3em;
 `;
 
 const LoginInput = styled.input`
@@ -70,123 +101,125 @@ const LoginInput = styled.input`
 
 const LoginParagraph = styled.p`
 font-size:1em;
-
+margin-right:3em;
 `;
-const InnerContainer = styled.div``
-
-const InnerLogin = styled.div``
-// const LoginPara = styled.p`
-
-const LoginPara = styled.p`
+const InnerContainer = styled.div`
+border:3px solid #CD5888;
+text-align:center;
+width:20%;
+border-radius:10px;
+margin:0 auto;
+padding:3em;
+align-items:center;
+ `
+const InnerLogin = styled.div`
 `
+const LoginPara = styled.p`
+margin-left:3em;`
 
-const LoginParagraphCheck=styled.p`
+const LoginParagraphCheck = styled.p`
 text-align:center;
 `
-
 const LoginCheck = styled.div`
 gap:3em;
 align-items:center;
+margin-left:5em;
 display:flex;
 flex-direction:row;
 `;
 const Form = styled.div`
-align-items:center;`
+align-items:center;
+`
+const P = styled.p``;
+
+
+
 
 const LoginItems = () => {
+  // const { isLogged } = useContext(LoginContext)
+  // const [isLogin, setLogin] = isLogged
+  const [isOpen, setIsOpen] = useState(false);
+  const [show, setShow] = useState(false)
+  //    const [email, setEmail] = emailState;
+  // const [password, setPassword] = passwordState;
+  
 
-   const [show, setShow] = useState(false)
-
-    const [values, setValues] = useState({
-    username:"",
-   email: "",
+  const [values, setValues] = useState({
+    email: "",
     password: "",
-   })
+  })
 
-    const [error, setError] = useState({
-    username:"",
-     emailError: "",
-     passwordError: ""
-    
-    });
+  const [error, setError] = useState("");
 
   console.log(error)
 
 
-   const handleChange = async (e) => {
-    e.preventDefault();
-     try {
-      if(values.username===""){
-        setError(prev=>({...prev, usernameError:"Enter your email" }))
-      }
-       
-      if(values.email===""){
-       setError(prev=>({...prev, emailError:"Enter your email" }))
-      }
-       
-    else if (values.password === ""){
-        setError(prev=>({ ...prev, passwordError: "Enter your password" }));
-    } 
-       
-  else { 
-      console.log(error);
+  
 
-   }
-  }
-  catch (error) {
-     console.log("error fill in the correct information", error);
+  const handleLogin = (event) => {
+    event.preventDefault();
+    try {
+     
+      if (values.email === "") {
+        return setError("Please enter your email address")
+      }
+
+      if (values.password === "") {
+       return  setError("Please enter your password")
+      }
+
+     else {
+       
+        console.log(error);
+      }
+    }
+    catch (error) {
+      console.log("error fill in the correct information", error);
 
     }
-
- 
-  const handleLoginInputChange = (event) => {
-    setValues({ ...values, Login: event.target.values })
-   }
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (values.email && values.password && values.Login) {
   }
-  }
-    
-     }
-    
   return (
-   
+
     <LoginContainer>
-      <InnerContainer>
-        <InnerLogin>
-          <LoginPara>okpoigpt</LoginPara>
+      <LoginDetails>
 
-
-</InnerLogin>
-
-
-      <LoginHeading>Login</LoginHeading>
-      <Form>
+        <LoginHeading>Login</LoginHeading>
+        <Form>
           <Inputs>
-          <LoginInputs type="text" placeholder="Username"  onChange={(e) => { setValues({ ...values,Username: e.target.value }) }}/>
-          <LoginInputs type="text" placeholder="email" onChange={(e) => { setValues({ ...values,email: e.target.value }) }}/>
-          <PasswordContainer>
+            <LoginInputs value={values.email} type="email" placeholder="email" onChange={(e) => { setValues(prev=>({ ...prev, email: e.target.value })) }} />
+  
+            <PasswordContainer>
                     <InputShowFlex>
-                        <PasswordInput type={show?"text":"password"} placeholder="Password" onChange={(e) => { setValues({ ...values,password: e.target.value }) }} />
-                        
-                        <ShowPassword onClick={()=>setShow(prev=>!prev)}>{show?<VisibilityIcon/>:<VisibilityOffIcon/>}</ShowPassword>
+              <PasswordInput value={values.password } type='password' placeholder='Password' onChange={(e) => { setValues(prev=>({ ...prev, password: e.target.value })) }}  />
+                        <ShowPassword onClick={()=>setValues(prev=>!prev)}>{values?<VisibilityIcon/>:<VisibilityOffIcon/>}</ShowPassword>
+
                     </InputShowFlex>
-              </PasswordContainer>
+                </PasswordContainer>    
+              <P style={{ color: "red" }}>{error}</P>
+
           </Inputs>
 
-      <LoginCheck>
-        <LoginInput type="checkbox" />
-    <LoginPara>  Remember me</LoginPara>  
+
+          <LoginCheck>
+            <LoginInput type="checkbox" />Remember me.
+            <LoginPara>Forgot Password?</LoginPara>
           </LoginCheck>
- <Link to='/'><Button onClick={(e)=>handleChange(e)}>Login</Button> </Link>
- 
+
+
+          <Link to='/'><Button onClick={(e) => handleLogin(e)}>Login</Button> </Link>
+
 
         </Form>
-        </InnerContainer>
-   </LoginContainer>
-    
+      </LoginDetails>
+
+      <LoginLeft>
+        <Paragraph> Host your stuhome.</Paragraph>
+      </LoginLeft>
+
+
+
+    </LoginContainer>
+
   );
 };
 export default LoginItems;
-

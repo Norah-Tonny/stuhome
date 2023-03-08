@@ -1,40 +1,63 @@
+import { Label } from "@mui/icons-material";
 import { Select } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import Nav from "../components/Nav"
-import Footer from "./Footer";
-const ListingContainer = styled.div`
-margin:3em 3em;`
+import Nav from "./Nav"
+import { db } from "../Firebase";
+import { ref, uploadString, uploadBytes } from "firebase/storage";
+import { addDoc, collection } from "firebase/firestore";
+import { storage } from "../Firebase";
 
-const ListingInput = styled.input`
-padding: 2em;
-width:30%;
+import Footer from "./Footer";
+const Container = styled.div`
+background:whitesmoke;
+
+`
+const TextInput = styled.input`
+padding: 1.5em;
+width:50%;
 border-radius: 5px;
 border:none;
 box-shadow:0 0 3px 1px gray;
 outline:none;`
 
-const SelectOption = styled.option`
-
-`
-const ListingInput1 = styled.input`
+const FormInput = styled.input`
+padding: 1.5em;
+width:50%;
+border-radius: 5px;
 border:none;
-`
+box-shadow:0 0 3px 1px gray;
+outline:none;`
 
-
-const Selected = styled.div``
-const List =styled.div``
-
-const Inputs = styled.div`
+const Form = styled.div`
+margin:0 auto;
+align-items:center;
+text-align:center;
 display:flex;
 flex-direction:column;
-align-items:center;
-margin:3em 3em;
-gap:2em;`
+padding:5em;
+gap:2em;
+width:50%;
+// border:2px solid red;
+`
 
-const ListLeft=styled.div``
+const TextArea = styled.textarea`
+padding: 1em;
+width:50%;
+border-radius: 5px;
+border:none;
+box-shadow:0 0 3px 1px gray;
+outline:none;`
 
-const ListingButton = styled.button`
+const FormHeading = styled.h1`
+`
+
+const Paragraph = styled.label`
+margin:.5m;
+`
+
+
+const Button = styled.button`
 padding:1em 2em;
 font-size:1rem;
 curser:pointer;
@@ -42,39 +65,172 @@ background:#CD5888;
 border-radius:5px;
 border:none;`
 
+
 const Listing = () => {
-    return (
-        <ListingContainer>
-            <Nav />
-            <Listing>
+  const [isOpen, setIsOpen] = useState(false);
+  const [details, setDetails] = useState({
+    Hostel: "",
+    Image: "",
+    Position: "",
+    Agent: "",
+    Pricing: "",
+    Location:"",
+    Requirements: "",
+    Anemities: "",
+    Rules: "",
+    About: "",
 
-<ListLeft></ListLeft>
+  });
 
-            <Inputs>
-                <List>
-                <ListingInput1 type='text' placeholder="Location" />
-                <Select>
-                    <SelectOption>Nairobi</SelectOption>
-                    <SelectOption>Kisumu</SelectOption>
-                    <SelectOption>Mombasa</SelectOption>
-                    <SelectOption>Siaya</SelectOption>
-                    <SelectOption>Kilifi</SelectOption>
-                    <SelectOption>Kakamega</SelectOption>
-                    <SelectOption>Moyale</SelectOption>
-                    <SelectOption>Turkana</SelectOption>
-                 <SelectOption>Nakuru</SelectOption>
-                </Select>
-                </List>
 
-            <ListingInput type='text' placeholder="Hostel type"/>
-            <ListingInput type='text' placeholder="Maximum price" />
-            <ListingInput type='text' placeholder=""/>
-                <ListingButton>Search</ListingButton>
-                </Inputs>
-                </Listing>
-            <Footer />
-            
-    </ListingContainer>
-    )
+  const [error, setError] = useState({
+    Hostel: "",
+    Image: "",
+   Position: "",
+    Agent: "",
+    Pricing: "",
+    Location:"",
+    Requirements: "",
+    Anemities: "",
+    Rules: "",
+    About: "",
+
+
+  });
+
+  const listingSubmit = async (e) => {
+    e.preventDefault();
+    console.log(details)
+
+    try {
+      if (details.Hostel === "") {
+        setError(prev => ({ ...prev, HostelError: "Enter the hostel " }));
+      }
+
+      if (details.Image === "") {
+        setError(prev => ({ ...prev, ImageError: "Enter the image" }));
+      }
+
+      if (details.Position=== "") {
+        setError(prev => ({ ...prev,PositionError: "Enter house position " }));
+      }
+      if (details.Agent === "") {
+        setError(prev => ({ ...prev, AgentError: "Enter the agent" }));
+      }
+      if (details.Pricing === "") {
+        setError(prev => ({ ...prev, PricingError: "Enter the price" }))
+      }
+
+
+      if (details.Location === "") {
+        setError(prev => ({ ...prev, LocationError: "Enter the location" }));
+      }
+
+
+      if (details.Requirements === "") {
+        setError(prev => ({ ...prev, RequirementError: "Enter requirements" }))
+      }
+      if (details.Anemities === "") {
+        setError(prev => ({ ...prev, AnemitiesError: "Enter the anemities" }))
+      }
+      if (details.Rules === "") {
+        setError(prev => ({ ...prev, RulesError: "Enter the rules" }))
+      }
+
+      if (details.About === "") {
+        setError(prev => ({ ...prev, AboutError: "Enter your about" }))
+      }
+
+      else {
+
+        await addDoc(collection(db, "hostel"), details);
+        console.log('Hostel added successfully')
+        setDetails({
+          Hostel: "",
+          Image: "",
+         Positon: "",
+          Agent: "",
+          Pricing: "",
+          Location: "",
+          Requirements: "",
+          Anemities: "",
+          Rules: "",
+          About: "",
+
+        });
+
+      }
+    }
+    catch (error) {
+      console.log(error);
+    }
+    console.log(details)
+
+  };
+
+  const uploadFile = (e) => {
+    const file = e.target.files[0]
+console.log(file.name)
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      console.log(reader.result);
+
+      // Data URL string
+      const storageRef = ref(storage, `hostels/${file.name}`);
+
+      const fileData = reader.result;
+      uploadString(storageRef, fileData, 'data_url').then((snapshot) => {
+        console.log('Uploaded a data_url string!');
+        setDetails(prev=>({ ...prev, Image: `https://firebasestorage.googleapis.com/v0/b/stuhome-fbd53.appspot.com/o/hostels%2F${file.name}?alt=media` }));
+    
+      });
+
+   };
+    reader.onerror = (error) => {
+      console.log('Error: ', error);
+    };
+
+  }
+
+  return (
+
+    <Container>
+      <Nav />
+      <Form>
+        <FormHeading>Listing</FormHeading>
+
+        <TextInput type='text' value={details.Hostel} placeholder="Hostel Name" onChange={(e) => { setDetails({ ...details, Hostel: e.target.value }) }} />
+           
+        <TextArea type="Text" value={details.About}  placeholder="About the Hostel"onChange={(e) => { setDetails({ ...details, About: e.target.value }) }}/> 
+        
+        <Paragraph>Upload Image</Paragraph>
+                  
+        <FormInput type='file' value={details.file}  placeholder="Image" onChange={(e) => uploadFile(e)} />
+
+            <TextArea type='text' value={details.Position}  placeholder="House Position" onChange={(e) => { setDetails({ ...details, Position: e.target.value }) }} />
+          
+            <TextArea type='text' value={details.Agent}  placeholder="Agent Name" onChange={(e) => { setDetails({ ...details, Agent: e.target.value }) }} />
+
+            <TextArea type='text' value={details.Location}  placeholder="Location" onChange={(e) => { setDetails({ ...details, Location : e.target.value }) }} />
+
+            <FormInput type='number' value={setDetails.Pricing} placeholder="Maximum price" onChange={(e) => { setDetails({ ...details,Pricing: e.target.value }) }} />
+     
+            <TextArea type='text' value={details.Requirements}  placeholder="Requirements" onChange={(e) => { setDetails({ ...details, Requirements: e.target.value }) }} />
+    
+              <TextArea type='text' value={details.Anemities}  placeholder="Anemities" onChange={(e) => { setDetails({ ...details, Anemities: e.target.value }) }} />
+  
+            <TextArea type='text' value={details.Rules}  placeholder="House Rules" onChange={(e) => { setDetails({ ...details, Rules: e.target.value }) }} />
+      
+        <Button onClick={(e) => listingSubmit(e)}>Post</Button>
+
+      </Form>
+     
+      <Footer />
+
+    </Container>
+  )
 }
 export default Listing;
+
+

@@ -1,59 +1,135 @@
+import React, { useEffect, useState, useContext } from "react";
+import styled from "styled-components";
 
-import styled from "styled-components"
 
+
+// import ReactModal from 'react-modal';
+import { Context } from "../State";
+import { Link } from "react-router-dom";
+// import spinner from './spinner. gif'; 
 const Container = styled.div``
 
-const Para = styled.p`
+const Heading = styled.h1`
 text-align:center;
-padding-bottom:8rem;
+padding:2rem;
 font-weight:bold;
 font-size:2rem;
-font-weight:bold;;
+font-weight:bold;
+color:#CD5888;
 `
-
 
 const HomeContainer = styled.div`
-
-`
+// background:red;
+// display:flex;
+// flex-direction:row
+;`
 
 const Homepara = styled.h1`
 text-transform:uppercase;
-margin:0 auto;
+color:#CD5888;
 text-align:center;
-padding-bottom:8rem;
-margin-bottom:5em;
+ padding-top:13rem;
 font-weight:bold;
-font-size:2rem;
-font-weight:bold;
+font-size:3rem;
+
 `
 const HomeCover = styled.div`
-background-image :url('https://images.pexels.com/photos/667838/pexels-photo-667838.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+background-image :linear-gradient(rgb(0,0,0,0.6),rgb(0,0,0,0.6)),url('https://images.pexels.com/photos/667838/pexels-photo-667838.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
 background-repeat:no-repeat;
 background-size:cover;
 background-position:center;
-height:50vh;
+height:60vh;
+width:60wh;
+padding-top:3em;
+`
+const HomeMap = styled.div`
+display:flex;
+ flex-direction:row;
+ gap:5em;
+ width:60%;
+align-itmes:center;
+flex-wrap:wrap;
+margin:0 auto;
+justify-content:space-between;
+// margin-buttom:
+// border:2px solid lightGrey;
+`
+
+const Paragraph = styled.p`
+font-size:1rem;
+font-weight:bold;`
+
+const HomeButton = styled.button``
+
+const Hostels = styled.div`
+width:20%;
+border:none;
 
 
 `
-const HomeMap = styled.div``
 
+const Image = styled.img`
+height:30vh;
+width:30wh;
+`
+
+const Loader = styled.img`
+display:block;
+margin:0 auto;
+`
+
+const Button = styled.button`
+padding:1em 2em;
+font-size:1rem;
+curser:pointer;
+background:#CD5888;
+border-radius:5px;
+border:none;`
 
 const HomeItems = () => {
+  const { itemState, hostelState, docIdState, loaderState } = useContext(Context)
+  const [hostels, setHostels] = hostelState
+  const [isOpen, setIsOpen] = useState(false);
+  const [docId, setDocId] = docIdState;
+  const [loader, setLoader] = loaderState
+
+  useEffect(() => {
+
+
+  }, [])
+
+  console.log(hostels)
+
   return (
     <Container>
-    <HomeContainer>
+
       <HomeCover>
         <Homepara>Host your hostel with stuhome</Homepara>
-        </HomeCover>
-        
-      <HomeMap>
-          <Para>Featured hostels</Para>
-          
-      </HomeMap>
+        {console.log(hostels)}
+      </HomeCover>
 
-    </HomeContainer>
+      <HomeContainer>
+        <Heading>Featured Hostel</Heading>
+        {loader && <Loader src="/loaders/loader.gif" />}
+
+        <HomeMap>
+          {hostels.map((hostel, index) => {
+            return (
+              <Hostels id="Hostel" key={index}>
+
+                <Image src={hostel.Image} />
+                <Paragraph>Location:{hostel.Location}</Paragraph>
+                <Paragraph>Ksh.{hostel.Pricing}</Paragraph>
+                <Link to={`hostel/${docId[index]}`}><Button >View</Button></Link>
+              </Hostels>
+            );
+          })}
+
+        </HomeMap>
+
+      </HomeContainer>
     </Container>
   )
 
 }
-export default HomeItems;  
+export default HomeItems;

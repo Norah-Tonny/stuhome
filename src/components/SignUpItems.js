@@ -1,19 +1,28 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { db } from "../Firebase";
-import {collection, addDoc } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 import { Link } from "@mui/material";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { border, padding } from "@mui/system";
+import { auth } from "../Firebase";
+import { useContext } from "react";
+import { Context } from "../State";
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+
 
 const SignUpItemsContainer = styled.div`
  gap:6em; 
+ background:whitesmoke;
  text-align:center;`;
 
-const SignUpHeading = styled.h1``;
 
-const SignUpParagraph = styled.p`
-font-size:1em;`;
+const Input = styled.div`
+ width:300px;
+ background:;`
+
+const SignUpHeading = styled.h1``;
 
 const SignUpInput = styled.input`
    padding: 2em;
@@ -35,6 +44,7 @@ padding:1.3em;
 const PasswordInput = styled.input`
  width: 100%;
   outline: none;
+  background:whitesmoke;
    border:none;
     `
 
@@ -46,7 +56,7 @@ height: fit-content;
 
 const InputShowFlex = styled.div`
 display: flex; 
-align-items: center;
+align-items:center;
 width:100%;
 `
 const SignUpSubmit = styled.div``
@@ -62,10 +72,6 @@ background:#CD5888;
 border:none;
 `;
 
-const SignUpArea = styled.div``;
-
-const Label = styled.div`
-`;
 
 const P = styled.p``;
 
@@ -75,109 +81,150 @@ flex-direction:column;
 align-items:center;
 `
 
+
 const SignUpItems = () => {
-    const [values, setValues] = useState({
+
+  const { emailState,passwordState } =useContext(Context);
+    const [email, setEmail] = emailState;
+  const [password, setPassword] = passwordState;
+  
+  const [values, setValues] = useState({
+    FirstName: "",
+    LastName: "",
+    Contact: "",
+    select: "",
+    Email: "",
+    Password: "",
+  });
+
+  const [message, setMessage] = useState({
+    message: ""
+  })
+
+  const [error, setError] = useState("");
+
+
+
+
+  const handleRegister = async (e) => {
+    e.preventDefault()
+    console.log(values)
+
+    try {
+      if (values.FirstName === "") {
+        return setError("Enter your First Name ");
+      }
+      if (values.LastName === "") {
+        return setError("Enter your Second Name ");
+      }
+      if (values.Contact === "") {
+        return setError("Enter your Contact");
+      }
+      if (values.Email === "") {
+        return setError("Enter your Email")
+      }
+      if (values.Password === "") {
+        return setError("Enter your Password");
+      }
+
+      if (values.select === "") {
+        return setError("Select one");
+      }
+
+      
+
+
+
+      await addDoc(collection(db, "user"), values);
+      setValues({
         FirstName: "",
         LastName: "",
         Contact: "",
+        select: "",
         Email: "",
         Password: "",
-    });
-  
-  const [message, setMessage] = useState({
-    message:""
-  })
-
-    
-      const [error, setError] = useState({
-        FirstnameError: "",
-        LastnameError: "",
-        ContactError: "",
-        EmailError: "",
-        PasswordError: ""
       });
-    
-  const handleChange = async (e) => {
-    e.preventDefault()
-        console.log(values)
-      
-        try {
-          if (values.FirstName === "") {
-            setError(prev => ({ ...prev, FirstnameError: "Enter your firstName " }));
-          }
-          if (values.SecondName === "") {
-            setError(prev => ({ ...prev, SecondnameError: "Enter your secondName " }));
-          }
-          if (values.Contact === "") {
-            setError(prev => ({ ...prev, ContactError: "Enter your contact" }));
-          }
-          if (values.Email === "") {
-            setError(prev => ({ ...prev, EmailError: "Enter your email" }))
-          }
-          if (values.Password === "") {
-            setError(prev => ({ ...prev, PasswordError: "Enter your password" }));
-          }
-    
-          else {
-    
-            await addDoc(collection(db, "user"), values);
-            setValues({
-              FirstName: "",
-              LastName: "",
-              Contact: "",
-              Email: "",
-              Password: "",
-            });
-            
-          }
-        }
-        catch (error) {
-          console.log(error);
-        }
-    
-      };
-    
+
+    }
+
+    catch (error) {
+      console.log(error);
+    }
+
+  };
 
 
-    return (
-        
-<SignUpItemsContainer>
-    
+  function handleUser() {
+  
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+
+        console.log(user)
+
+        alert    ("succesfully registered")
+        // ...
+      })
+
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage)
+        // ..
+      });
+}
+
+
+
+
+  return (
+
+    <SignUpItemsContainer>
+
       <SignUpHeading>Sign Up</SignUpHeading>
       <Form>
-        {values.FirstName === "" ? <P style={{ color: "red" }}>{error.FirstnameError}</P>:<P></P>}
-        <SignUpInput type="text" placeholder="First Name" onChange={(e) => { setValues({ ...values, FirstName: e.target.value }) }} />
 
-        {values.LastName === "" ? <P style={{ color: "red" }}>{error.LastnameError}</P>:<P></P>}
-        <SignUpInput type="text" placeholder="Last Name" onChange={(e) => { setValues({ ...values, LastName: e.target.value }) }} />
 
-        {values.Contact === "" ? <P style={{ color: "red" }}>{error.ContactError}</P>:<P></P>}
-        <SignUpInput type="contact" placeholder="Contact" onChange={(e) => { setValues({ ...values, Contact: e.target.value }) }} />
+        <select
+          value={values.select} onChange={(e) => { setValues({ ...values, select: e.target.value }) }}
+          name="identity" id="identity-select"
+          style={{ width: "33%", padding: "1.5em", marginBottom: "2em" }}>
+          <option value="">Are you a student or a landlord?</option>
+          <option value="Student">student</option>
+          <option value="Landloard">Landlord</option>
 
-        {values.Email === "" ? <P style={{ color: "red" }}>{error.EmailError}</P>:<P></P>}
-        <SignUpInput type="email" placeholder="Email" onChange={(e) => { setValues({ ...values, Email: e.target.value }) }} />
+        </select>
 
+
+        <SignUpInput value={values.FirstName} type="text" placeholder="First Name" onChange={(e) => { setValues({ ...values, FirstName: e.target.value }) }} />
+
+        <SignUpInput value={values.LastName} type="text" placeholder="Last Name" onChange={(e) => { setValues({ ...values, LastName: e.target.value }) }} />
+
+        <SignUpInput value={values.Contact} type="contact" placeholder="Contact" onChange={(e) => { setValues({ ...values, Contact: e.target.value }) }} />
+
+
+        <SignUpInput  type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
         <PasswordContainer>
-                    <InputShowFlex>
-              <PasswordInput type='password' placeholder='Password' onChange={(e) => { setValues({ ...values, Password: e.target.value }) }}  />
+          <InputShowFlex>
+            <PasswordInput  type='password' placeholder='Password' onChange={(e) => setPassword(e.target.value)} />
+            <ShowPassword onClick={() => setValues(prev => !prev)}>{values ? <VisibilityIcon /> : <VisibilityOffIcon />}</ShowPassword>
 
-                        <ShowPassword onClick={()=>setValues(prev=>!prev)}>{values?<VisibilityIcon/>:<VisibilityOffIcon/>}</ShowPassword>
-                    </InputShowFlex>
-                </PasswordContainer>    
+          </InputShowFlex>
+        </PasswordContainer>
 
+        <P style={{ color: "red" }}>{error}</P>
 
         <SignUpSubmit>
-            <Link to="/"> <Button onClick={(e) => handleChange(e)}>Submit </Button></Link>
-            
+          <Link to="/login"> <Button onClick={handleUser}>Sign Up </Button></Link>
+
 
         </SignUpSubmit>
-    
 
-      
       </Form>
-            
-</SignUpItemsContainer>
 
-    )
+    </SignUpItemsContainer>
+
+  )
 }
 export default SignUpItems;
