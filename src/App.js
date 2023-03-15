@@ -6,8 +6,8 @@ import About from "./Pages/About";
 import Contact from "./components/Contact";
 import Help from "./components/Help";
 import Listing from "./components/Listing";
-import Detail from "./components/Detail";
-import SingleItem  from "./components/SingleItem";
+import Dashboard from "./components/Dashboard";
+import SingleItem from "./components/SingleItem";
 import State from "./State";
 import './App.css'
 
@@ -27,7 +27,7 @@ const App = () => {
         <Route path="/about" element={<About/>}/>
         <Route path="/contact" element={<Contact/>}/>
         <Route path="/help" element={<Help />} />
-          <Route path="/detail" element={<Detail />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/hostel/:id" element={<SingleItem />} />
       </Routes>
       </BrowserRouter>

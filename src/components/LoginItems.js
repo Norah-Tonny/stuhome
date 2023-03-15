@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useState,useContext } from "react";
 import { db } from "../Firebase";
 import { addDoc, collection } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-
-
-
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { Context } from "../State";
+import { auth } from "../Firebase";
+// import { useContext } from "react";
 
 
 const LoginContainer = styled.div`
@@ -136,12 +137,14 @@ const P = styled.p``;
 
 
 const LoginItems = () => {
-  // const { isLogged } = useContext(LoginContext)
+  // const { isLogged } = useContext(Context)
   // const [isLogin, setLogin] = isLogged
+
+  const {emailState, passwordState} = useContext(Context);
   const [isOpen, setIsOpen] = useState(false);
   const [show, setShow] = useState(false)
-  //    const [email, setEmail] = emailState;
-  // const [password, setPassword] = passwordState;
+     const [email, setEmail] = emailState;
+  const [password, setPassword] = passwordState;
   
 
   const [values, setValues] = useState({
@@ -178,6 +181,21 @@ const LoginItems = () => {
 
     }
   }
+
+  const user = () =>{
+  
+  signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in 
+      const user = userCredential.user;
+      // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+    });
+  }
+
   return (
 
     <LoginContainer>
@@ -186,11 +204,11 @@ const LoginItems = () => {
         <LoginHeading>Login</LoginHeading>
         <Form>
           <Inputs>
-            <LoginInputs value={values.email} type="email" placeholder="email" onChange={(e) => { setValues(prev=>({ ...prev, email: e.target.value })) }} />
+            <LoginInputs  type="email" placeholder="email" onChange={(e) =>setEmail(e.target.value) } />
   
             <PasswordContainer>
                     <InputShowFlex>
-              <PasswordInput value={values.password } type='password' placeholder='Password' onChange={(e) => { setValues(prev=>({ ...prev, password: e.target.value })) }}  />
+              <PasswordInput  type='password' placeholder='Password' onChange={(e) => setPassword(e.target.value)}  />
                         <ShowPassword onClick={()=>setValues(prev=>!prev)}>{values?<VisibilityIcon/>:<VisibilityOffIcon/>}</ShowPassword>
 
                     </InputShowFlex>
@@ -206,7 +224,7 @@ const LoginItems = () => {
           </LoginCheck>
 
 
-          <Link to='/'><Button onClick={(e) => handleLogin(e)}>Login</Button> </Link>
+          <Link to='/'><Button onClick={user}>Login</Button> </Link>
 
 
         </Form>

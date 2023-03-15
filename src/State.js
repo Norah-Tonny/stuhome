@@ -10,7 +10,8 @@ const State = ({ children }) => {
     const [itemId, setItemId] = useState("");
     const [loader, setLoader] = useState(false);
     const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+    const [password, setPassword] = useState('');
+    const [update,setUpdate]=useState('')
 
 
 

@@ -116,7 +116,7 @@ const Nav = () => {
                 <NavRight>
 
                     <NavUl>
-                        <NavList> <Link to="/listing">Listing</Link></NavList>
+                        <NavList> <Link to="/dashboard">Dashboard</Link></NavList>
                         <NavList> <Link to="/login">Login</Link></NavList>
                         <NavList><Link to="/signup">SignUp</Link> </NavList>
                         <NavList><Link to="/help">Help</Link> </NavList>

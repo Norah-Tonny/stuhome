@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { json, Link } from "react-router-dom";
+import { useState } from "react";
 
 const Button = styled.button`
 padding:1em 1em ;
@@ -63,28 +64,70 @@ text-align:center;
 margin-bottom:1em;`
 
 
-const BookingModal = ({isOpen, setIsOpen}) => {
+const BookingModal = ({ isOpen, setIsOpen }) => {
+    const [formData, setformData] = useState({
+        phoneNumber: "",
+        amount: "",
+    })
+
+    async function payment() {
+
+        try {
+
+            console.log("Hello")
+
+            const url = "https://stumpesa.onrender.com/api/stk/push"
+
+
+            const options = {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData)
+
+            }
+
+
+            const paymentRequest = await fetch(url, options)
+
+
+
+            // const res = await paymentRequest.json()
+
+            console.log(paymentRequest)
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
+
+
+
+
+
+
+
+
     return (
         <Box sx={styled}>
-        <Typography id="modal-modal-title" variant="h3" component="h2">
-            <HeadingMethod>Payment Method</HeadingMethod>
-            <Paragraph>We recommend each hosteller to pay the commitment fee based on the  percentage of the toal amount of the hostel .</Paragraph>
+            <Typography id="modal-modal-title" variant="h3" component="h2">
+                <HeadingMethod>Payment Method</HeadingMethod>
+                <Paragraph>We recommend each hosteller to pay the commitment fee based on the  percentage of the toal amount of the hostel .</Paragraph>
 
-            <Paragraph> We may return part ofthe commitment fee if the student is not pleased with the hostel choosen.</Paragraph>
-        </Typography>
+                <Paragraph> We may return part ofthe commitment fee if the student is not pleased with the hostel choosen.</Paragraph>
+            </Typography>
 
-        <Typography1 id="modal-modal-description" sx={{ mt: 2 }}>
-            <Input type="number" placeholder="price" />
-            <Input type="number" placeholder="enter phone number" />
-          <  ButtonConfirm>
-                <Link to="/"><Button>Confirm Payment</Button></Link>
-              </ButtonConfirm>
-            <Buttons onClick={() => setIsOpen(false)}>Cancel</Buttons>
+            <Typography1 id="modal-modal-description" sx={{ mt: 2 }}>
+                <Input type="text" placeholder="Ammount" onChange={(e) => setformData({ ...formData, amount: e.target.value })} />
+                <Input type="text" placeholder="Enter phone number" onChange={(e) => setformData({ ...formData, phoneNumber: e.target.value })} />
+                <ButtonConfirm>
+                    <Button onClick={payment}>Confirm Payment</Button>
+                </ButtonConfirm>
+                <Buttons onClick={() => setIsOpen(false)}>Cancel</Buttons>
 
 
 
-        </Typography1>
-    </Box>
+            </Typography1>
+        </Box>
     )
 }
 
