@@ -51,8 +51,7 @@ align-itmes:center;
 flex-wrap:wrap;
 margin:0 auto;
 justify-content:space-between;
-// margin-buttom:
-// border:2px solid lightGrey;
+
 `
 
 const Paragraph = styled.p`

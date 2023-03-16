@@ -1,14 +1,16 @@
 import { Label } from "@mui/icons-material";
 import { Select } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import Nav from "./Nav"
+import { Context } from "../State";
 import { db } from "../Firebase";
 import { ref, uploadString, uploadBytes } from "firebase/storage";
 import { addDoc, collection } from "firebase/firestore";
 import { storage } from "../Firebase";
 
 import Footer from "./Footer";
+import userEvent from "@testing-library/user-event";
 const Container = styled.div`
 background:whitesmoke;
 
@@ -67,6 +69,8 @@ border:none;`
 
 
 const Listing = () => {
+  const { hostelState, docIdState, itemState, itemIdState, loaderState, userState } = useContext(Context)
+  const [user, setUser] = userState;
   const [isOpen, setIsOpen] = useState(false);
   const [details, setDetails] = useState({
     Hostel: "",
@@ -79,6 +83,7 @@ const Listing = () => {
     Anemities: "",
     Rules: "",
     About: "",
+    uid:user.uid
 
   });
 
@@ -93,7 +98,7 @@ const Listing = () => {
     Requirements: "",
     Anemities: "",
     Rules: "",
-    About: "",
+    About: ""
 
 
   });
@@ -156,6 +161,7 @@ const Listing = () => {
           Anemities: "",
           Rules: "",
           About: "",
+          uid:""
 
         });
 
@@ -198,6 +204,7 @@ console.log(file.name)
     <Container>
       <Nav />
       <Form>
+        {console.log(user.uid)}
         <FormHeading>Listing</FormHeading>
 
         <TextInput type='text' value={details.Hostel} placeholder="Hostel Name" onChange={(e) => { setDetails({ ...details, Hostel: e.target.value }) }} />

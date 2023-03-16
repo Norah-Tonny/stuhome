@@ -1,18 +1,16 @@
 import Nav from "./Nav";
 import Footer from "./Footer";
 import React, { useEffect, useContext, useState } from "react";
+import { Navigate } from "react-router-dom";
 import styled from "styled-components";
 import { db } from "../Firebase";
 import { addDoc, collection, getDocs } from "firebase/firestore";
-import { Link } from "react-router-dom";
+import { Link, Router } from "react-router-dom";
 import { Context } from "../State";
 import { useParams } from "react-router-dom";
-import BookingModal from "./BookingModal";
-import ScheduleModal from "./ScheduleModal";
-import ReviewModal from "./ReviewModal";
+
 
 const Container = styled.div``;
-// const HelpContent = styled.div``;
 
 const ViewContainer = styled.div`
   display: flex;
@@ -120,28 +118,36 @@ const Paragraph2 = styled.p`
 
 
 const Dashboard = () => {
-    const { itemState, hostelState, docIdState, itemIdState,deleteState,updateState } =
+    const { itemState, hostelState, docIdState, itemIdState,deleteState,userState } =
         useContext(Context);
     const [hostels, setHostels] = hostelState;
     const [itemId, setItemId] = itemIdState;
     const [docId, setDocId] = docIdState;
     const [item, setItem] = itemState;
-  const [update, setUpdate] = updateState;
- const [delet, setDelet] = deleteState
-  // const [delete, setDelete] = useState;
+  
+  const [user, setUser] = userState;
+
     const { id } = useParams();
 
     useEffect(() => {
         setItemId(id);
     }, []);
 
-    console.log(itemId);
+  console.log(itemId);
+
+  
+  
+    
+   
 
     return (
-        <Container>
-      
+      <Container>
+        
+        {
+          !user ? <Navigate to="/login" replace /> : (
+            <>
             <Nav/>
-            <ViewContainer>
+            /* <ViewContainer>
                 <HelpDetails>
                     <ViewText>
                         <Hostel id="Hostel">
@@ -179,9 +185,15 @@ const Dashboard = () => {
                         </Hostels>
                     </ViewText>
                 </Content>
-            </ViewContainer>
-
-            <Footer />
+            </ViewContainer> 
+        
+<h1>This is the Dashboard page</h1>
+              <Footer />
+              </>
+)
+        }
+      
+           
         </Container>
     );
 };

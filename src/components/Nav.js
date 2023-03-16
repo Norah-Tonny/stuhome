@@ -61,8 +61,9 @@ const NavLeft = styled.div``
 
 const Nav = () => {
 
-    const { hostelState, docIdState, itemState, itemIdState, loaderState } = useContext(Context)
+    const { hostelState, docIdState, itemState, itemIdState, loaderState, userState } = useContext(Context)
     const [hostels, setHostels] = hostelState
+    const [user, setUser] = userState
     const [itemId, setItemId] = itemIdState
     const [docId, setDocId] = docIdState
     const [item, setItem] = itemState
@@ -95,13 +96,24 @@ const Nav = () => {
     }, [docId])
 
 
+    useEffect(() => {
+        
+        const loggedInUser = JSON.parse(localStorage.getItem("user"));
+        console.log(loggedInUser)
+        if (loggedInUser) {
+          setUser(loggedInUser)
+        }
+      
+      }, [])
+
+
 
 
     const [isOpen, setIsOpen] = useState(false)
     return (
         <NavContainer>
             <InnerNav>
-                {console.log(docId)}
+                {console.log(user.uid)}
 
                 <NavLeft>
                     <LogoContainer>

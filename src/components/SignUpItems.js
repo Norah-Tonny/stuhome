@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { db } from "../Firebase";
 import { collection, addDoc } from "firebase/firestore";
 import { Link } from "@mui/material";
@@ -9,6 +9,7 @@ import { border, padding } from "@mui/system";
 import { auth } from "../Firebase";
 import { useContext } from "react";
 import { Context } from "../State";
+
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
 
@@ -96,14 +97,13 @@ const SignUpItems = () => {
     Email: "",
     Password: "",
   });
+ 
 
   const [message, setMessage] = useState({
     message: ""
   })
 
   const [error, setError] = useState("");
-
-
 
 
   const handleRegister = async (e) => {
@@ -154,14 +154,20 @@ const SignUpItems = () => {
   };
 
 
-  function handleUser() {
-  
+
+
+
+
+  function handleUser(e) {
+
+  e.preventDefault()
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
 
         console.log(user)
+
 
         alert    ("succesfully registered")
         // ...
@@ -216,7 +222,7 @@ const SignUpItems = () => {
         <P style={{ color: "red" }}>{error}</P>
 
         <SignUpSubmit>
-          <Link to="/login"> <Button onClick={handleUser}>Sign Up </Button></Link>
+          <Link to="/login"> <Button onClick={(e)=>handleUser(e)}>Sign Up </Button></Link>
 
 
         </SignUpSubmit>

@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { useState } from 'react'
+// import addNotification from 'react-push-notification';
+//  import { Notifications } from 'react-push-notification';
 
 
 const Button = styled.button`
@@ -62,7 +64,17 @@ transform:translate(-50%,-50%) ;
 `
 
 function ScheduleModal({ openSchedule, setOpenSchedule }) {
-
+    // const successNotification = ()=>{
+    //     addNotification({
+    //     //   title: 'Success',
+    //       title: 'You have successfully set a schedule ',
+    //       message: 'Welcome to stuhome',
+    //       theme: 'light',
+    //       closeButton:"X",
+    //       backgroundTop:"green",
+    //       backgroundBottom:"yellowgreen"
+    //     })
+    //   };
 
     return (
         <Box sx={styled}>
@@ -78,7 +90,7 @@ function ScheduleModal({ openSchedule, setOpenSchedule }) {
                 <Input type="time" placeholder="write time" />
                 <Input placeholder="enter your contact" />
                 <ButtonConfirm>
-                    <Link to="/"><Button>Pay a visit</Button></Link>
+                    <Button >Pay a visit</Button>
                 </ButtonConfirm>
                 <Buttons onClick={() => setOpenSchedule(false)}>Cancel</Buttons>
 

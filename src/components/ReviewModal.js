@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { useState } from 'react'
+// import addNotification from 'react-push-notification';
+//  import { Notifications } from 'react-push-notification';
 
 
 const Button = styled.button`
@@ -68,7 +70,17 @@ text-align:center;
 
 
 const ReviewModal = ({ openReview, setOpenReview }) => {
-
+//    const successNotification = ()=>{
+//         addNotification({
+//         //   title: 'Success',
+//           title: 'You have successfully post a review',
+//           message: 'Welcome to stuhome',
+//           theme: 'light',
+//           closeButton:"X",
+//           backgroundTop:"green",
+//           backgroundBottom:"yellowgreen"
+//         })
+//       };
     return (
 
 
@@ -84,7 +96,7 @@ const ReviewModal = ({ openReview, setOpenReview }) => {
                 <TextArea placeholder="Enter a review" />
 
                 < ButtonConfirm >
-                    <Link to="/"><Button>Post</Button></Link>
+                   <Button >Post</Button>
               </ButtonConfirm>
 
                 <Buttons onClick={() => setOpenReview(false)}>Cancel</Buttons>

@@ -1,7 +1,7 @@
-import { useState,useContext } from "react";
+import { useState,useContext,useEffect } from "react";
 import { db } from "../Firebase";
 import { addDoc, collection } from "firebase/firestore";
-import { Link } from "react-router-dom";
+import { json, Link } from "react-router-dom";
 import styled from "styled-components";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
@@ -183,17 +183,20 @@ const LoginItems = () => {
   }
 
   const user = () =>{
-  
   signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in 
-      const user = userCredential.user;
-      // ...
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-    });
+.then((userCredential) => {
+  // Signed in 
+  const user = userCredential.user;
+  console.log(user)
+  localStorage.setItem("user",JSON.stringify(user))
+  // ...
+})
+.catch((error) => {
+  const errorCode = error.code;
+  const errorMessage = error.message;
+});
+
+    
   }
 
   return (
