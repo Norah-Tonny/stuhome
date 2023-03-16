@@ -113,7 +113,7 @@ const Nav = () => {
     return (
         <NavContainer>
             <InnerNav>
-                {console.log(user.uid)}
+                {console.log(user && user.uid)}
 
                 <NavLeft>
                     <LogoContainer>

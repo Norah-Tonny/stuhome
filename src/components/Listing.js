@@ -82,12 +82,11 @@ const Listing = () => {
     Requirements: "",
     Anemities: "",
     Rules: "",
-    About: "",
-    uid:user.uid
+    About: ""
 
   });
 
-
+console.log(user)
   const [error, setError] = useState({
     Hostel: "",
     Image: "",
@@ -105,48 +104,49 @@ const Listing = () => {
 
   const listingSubmit = async (e) => {
     e.preventDefault();
+    setDetails(prev=>({...prev, uid:user.uid}))
     console.log(details)
 
     try {
       if (details.Hostel === "") {
-        setError(prev => ({ ...prev, HostelError: "Enter the hostel " }));
+       return setError(prev => ({ ...prev, HostelError: "Enter the hostel " }));
       }
 
       if (details.Image === "") {
-        setError(prev => ({ ...prev, ImageError: "Enter the image" }));
+        return setError(prev => ({ ...prev, ImageError: "Enter the image" }));
       }
 
       if (details.Position=== "") {
-        setError(prev => ({ ...prev,PositionError: "Enter house position " }));
+        return setError(prev => ({ ...prev,PositionError: "Enter house position " }));
       }
       if (details.Agent === "") {
-        setError(prev => ({ ...prev, AgentError: "Enter the agent" }));
+        return setError(prev => ({ ...prev, AgentError: "Enter the agent" }));
       }
       if (details.Pricing === "") {
-        setError(prev => ({ ...prev, PricingError: "Enter the price" }))
+        return setError(prev => ({ ...prev, PricingError: "Enter the price" }))
       }
 
 
       if (details.Location === "") {
-        setError(prev => ({ ...prev, LocationError: "Enter the location" }));
+        return setError(prev => ({ ...prev, LocationError: "Enter the location" }));
       }
 
 
       if (details.Requirements === "") {
-        setError(prev => ({ ...prev, RequirementError: "Enter requirements" }))
+        return setError(prev => ({ ...prev, RequirementError: "Enter requirements" }))
       }
       if (details.Anemities === "") {
-        setError(prev => ({ ...prev, AnemitiesError: "Enter the anemities" }))
+        return setError(prev => ({ ...prev, AnemitiesError: "Enter the anemities" }))
       }
       if (details.Rules === "") {
-        setError(prev => ({ ...prev, RulesError: "Enter the rules" }))
+        return setError(prev => ({ ...prev, RulesError: "Enter the rules" }))
       }
 
       if (details.About === "") {
-        setError(prev => ({ ...prev, AboutError: "Enter your about" }))
+       return setError(prev => ({ ...prev, AboutError: "Enter your about" }))
       }
 
-      else {
+      
 
         await addDoc(collection(db, "hostel"), details);
         console.log('Hostel added successfully')
@@ -160,12 +160,11 @@ const Listing = () => {
           Requirements: "",
           Anemities: "",
           Rules: "",
-          About: "",
-          uid:""
+          About: ""
 
         });
 
-      }
+      
     }
     catch (error) {
       console.log(error);
@@ -221,7 +220,7 @@ console.log(file.name)
 
             <TextArea type='text' value={details.Location}  placeholder="Location" onChange={(e) => { setDetails({ ...details, Location : e.target.value }) }} />
 
-            <FormInput type='number' value={setDetails.Pricing} placeholder="Maximum price" onChange={(e) => { setDetails({ ...details,Pricing: e.target.value }) }} />
+            <FormInput type='number' value={details.Pricing} placeholder="Rent" onChange={(e) => { setDetails({ ...details,Pricing: e.target.value }) }} />
      
             <TextArea type='text' value={details.Requirements}  placeholder="Requirements" onChange={(e) => { setDetails({ ...details, Requirements: e.target.value }) }} />
     
