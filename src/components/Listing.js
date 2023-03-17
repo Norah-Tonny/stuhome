@@ -69,22 +69,12 @@ border:none;`
 
 
 const Listing = () => {
-  const { hostelState, docIdState, itemState, itemIdState, loaderState, userState } = useContext(Context)
+
+  
+  const { hostelState, docIdState, itemState, itemIdState, loaderState, userState, detailsState } = useContext(Context)
   const [user, setUser] = userState;
   const [isOpen, setIsOpen] = useState(false);
-  const [details, setDetails] = useState({
-    Hostel: "",
-    Image: "",
-    Position: "",
-    Agent: "",
-    Pricing: "",
-    Location:"",
-    Requirements: "",
-    Anemities: "",
-    Rules: "",
-    About: ""
-
-  });
+  const [details, setDetails] = detailsState;
 
 console.log(user)
   const [error, setError] = useState({
@@ -104,7 +94,7 @@ console.log(user)
 
   const listingSubmit = async (e) => {
     e.preventDefault();
-    setDetails(prev=>({...prev, uid:user.uid}))
+    
     console.log(details)
 
     try {
@@ -146,8 +136,7 @@ console.log(user)
        return setError(prev => ({ ...prev, AboutError: "Enter your about" }))
       }
 
-      
-
+    
         await addDoc(collection(db, "hostel"), details);
         console.log('Hostel added successfully')
         setDetails({
@@ -163,6 +152,9 @@ console.log(user)
           About: ""
 
         });
+    
+
+
 
       
     }

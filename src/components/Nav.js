@@ -61,13 +61,14 @@ const NavLeft = styled.div``
 
 const Nav = () => {
 
-    const { hostelState, docIdState, itemState, itemIdState, loaderState, userState } = useContext(Context)
+    const { hostelState, docIdState, itemState, itemIdState, loaderState, userState,detailsState } = useContext(Context)
     const [hostels, setHostels] = hostelState
     const [user, setUser] = userState
     const [itemId, setItemId] = itemIdState
     const [docId, setDocId] = docIdState
     const [item, setItem] = itemState
     const [loader, setLoader] = loaderState
+    const [details, setDetails] =detailsState
 
 
     useEffect(() => {
@@ -102,7 +103,9 @@ const Nav = () => {
         console.log(loggedInUser)
         if (loggedInUser) {
           setUser(loggedInUser)
+          setDetails(prev=>({...prev, uid:loggedInUser.uid}))
         }
+
       
       }, [])
 

@@ -127,11 +127,26 @@ const Dashboard = () => {
   
   const [user, setUser] = userState;
 
+
+
+  // const fetchData = () => {
+  //   return fetch("")
+  //         .then((response) => response.json())
+  //         .then((data) => setUser(data));
+  // }
+
+  // useEffect(() => {
+  //   fetchData();
+  // },[])
+
+
     const { id } = useParams();
 
     useEffect(() => {
         setItemId(id);
     }, []);
+  
+  
 
   console.log(itemId);
 

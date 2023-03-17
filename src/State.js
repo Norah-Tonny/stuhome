@@ -12,11 +12,24 @@ const State = ({ children }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [update, setUpdate] = useState('');
-    const [ user,setUser]=useState('')
+    const [user, setUser] = useState('');
+    const [details, setDetails] = useState({
+        Hostel: "",
+        Image: "",
+        Position: "",
+        Agent: "",
+        Pricing: "",
+        Location: "",
+        Requirements: "",
+        Anemities: "",
+        Rules: "",
+        About: ""
+
+    })
 
 
     return (
-        <Context.Provider value={{ itemState: [item, setItem], hostelState: [hostels, setHostels],docIdState:[docId,setDocId], userState:[user,setUser], itemIdState:[itemId, setItemId] ,loaderState:[loader,setLoader],emailState:[email, setEmail] ,passwordState: [password, setPassword]}}>
+        <Context.Provider value={{ itemState: [item, setItem], detailsState: [details, setDetails], hostelState: [hostels, setHostels], docIdState: [docId, setDocId], userState: [user, setUser], itemIdState: [itemId, setItemId], loaderState: [loader, setLoader], emailState: [email, setEmail], passwordState: [password, setPassword] }}>
 
             {children}
 
