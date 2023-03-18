@@ -4,11 +4,10 @@ import React, { useEffect, useContext, useState } from "react";
 import { Navigate } from "react-router-dom";
 import styled from "styled-components";
 import { db } from "../Firebase";
-import { addDoc, collection, getDocs } from "firebase/firestore";
 import { Link, Router } from "react-router-dom";
 import { Context } from "../State";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 import { useParams } from "react-router-dom";
-
 
 const Container = styled.div``;
 
@@ -30,15 +29,6 @@ const Button = styled.button`
   border: none;
 `;
 
-// const Button1 = styled.button`
-//   padding: 1em;
-//   font-size: 1rem;
-//   width: 500%;
-//   curser: pointer;
-//   background: #cd5888;
-//   border-radius: 5px;
-//   border: none;
-// `;
 
 const Buttons = styled.button`
   padding: 1em 2em;
@@ -48,24 +38,6 @@ const Buttons = styled.button`
   border-radius: 5px;
   border: 2px solid #cd5888;
 `;
-
-// const Input = styled.input`
-//   padding: 1em 2em;
-//   width: 70%;
-//   border-radius: 5px;
-//   background: whitesmoke;
-//   border: 2px solid lightGreay;
-//   background: transparent;
-// `;
-
-// const Box = styled.div`
-//   width: 35%;
-//   padding: 3em;
-//   margin: 0 auto;
-//   border-radius: 10px;
-//   background: transparent;
-//   border: 2px solid lightGrey;
-// `;
 
 const ViewText = styled.div`
   display: flex;
@@ -110,142 +82,116 @@ const Paragraph1 = styled.p`
   font-size: 1.2em;
 `;
 
-
 const Paragraph2 = styled.p`
   font-size: 1.2em;
 `;
 
-
-
 const Dashboard = () => {
-    const { itemState, hostelState, docIdState, itemIdState,deleteState,userState } =
-        useContext(Context);
-    const [hostels, setHostels] = hostelState;
-    const [itemId, setItemId] = itemIdState;
-    const [docId, setDocId] = docIdState;
-    const [item, setItem] = itemState;
-  
+  const {
+    itemState,
+    hostelState,
+    docIdState,
+    itemIdState,
+    deleteState,
+    userState,
+  } = useContext(Context);
+  const [hostels, setHostels] = hostelState;
+  const [itemId, setItemId] = itemIdState;
+  const [docId, setDocId] = docIdState;
+  const [item, setItem] = itemState;
+
   const [user, setUser] = userState;
 
+  let newHostel = [];
 
 
-  // const fetchData = () => {
-  //   return fetch("")
-  //         .then((response) => response.json())
-  //         .then((data) => setUser(data));
-  // }
+  const { id } = useParams();
 
-  // useEffect(() => {
-  //   fetchData();
-  // },[])
+  useEffect(() => {
+    setItemId(id);
+  }, []);
+  console.log(hostels)
 
-
-    const { id } = useParams();
-
-    useEffect(() => {
-        setItemId(id);
-    }, []);
-  
-  
-
-  console.log(itemId);
+  const unique = hostels.filter((obj, index) => {
+    return index === hostels.findIndex(o => obj.About === o.About);
+  });
 
   
   
+  return (
+    <Container>
     
-   
+      {!user ? (
+        <Navigate to="/login" replace />
+      ) : (
+        <>
+          <Nav />
+          <ViewContainer>
+              <Content>
+                {/* {console.log(unique)} */}
+              {unique.map(
+                (hostel, index) => {
+                  // return()
+                  if (user.uid === hostel.uid) {
+                    // console.log(hostel)
 
-    return (
-      <Container>
-        
-        {
-          !user ? <Navigate to="/login" replace /> : (
-            <>
-            <Nav/>
-            /* <ViewContainer>
-                <HelpDetails>
-                    <ViewText>
-                        <Hostel id="Hostel">
-                            <Image src={item && item.Image} />
-                        </Hostel>
-                    </ViewText>
-                </HelpDetails>
-
-                <Content>
-                    <ViewText>
-                        <Hostels id="Hostel">
-                            <Heading>Booking Details</Heading>
-
-                            <Paragraph>Hostel:{item && item.Hostel}</Paragraph>
-                            <Paragraph>Gender:{item && item.Gender}</Paragraph>
-                            <Paragraph>Agent:{item && item.Agent}</Paragraph>
-                            <Paragraph>About the hostel:{item && item.About}</Paragraph>
-                            <PriceItem>
-                                <Paragraph2>Price:</Paragraph2>
-
-                                <Paragraph1>Ksh.{item && item.Pricing}</Paragraph1>
-                            </PriceItem>
-
-                            <Paragraph>Location:Gender{item && item.Location}</Paragraph>
-                            <Paragraph>Requirements:{item && item.Requirements}</Paragraph>
-                            <Paragraph>Anemities:{item && item.Anemities}</Paragraph>
-                            <Paragraph>Rules:{item && item.Rules}</Paragraph>
-
-                            <BookButtons>
-                  
-                               <Link to='/listing'>  <Buttons >Update</Buttons></Link> 
-
-                               <Link to='/listing'> <Buttons>Delete</Buttons></Link> 
-                            </BookButtons>
-                        </Hostels>
-                    </ViewText>
-                </Content>
-            </ViewContainer> 
-        
-<h1>This is the Dashboard page</h1>
-              <Footer />
-              </>
-)
-        }
+                    return (
+                        <Hostels id="Hostel" key={index}>
       
-           
-        </Container>
-    );
+                          <Image src={hostel.Image} />
+                          <Paragraph>Location:{hostel.Location}</Paragraph>
+                          <Paragraph>Ksh.{hostel.Pricing}</Paragraph>
+                          <Link to={`hostel/${docId[index]}`}><Button >View</Button></Link>
+                          <Heading>Booking Details</Heading>
+      
+                          <Paragraph>Hostel:{item && item.Hostel}</Paragraph>
+                          <Paragraph>Gender:{item && item.Gender}</Paragraph>
+                          <Paragraph>Agent:{item && item.Agent}</Paragraph>
+                          <Paragraph>About the hostel:{item && item.About}</Paragraph>
+                          <PriceItem>
+                            <Paragraph2>Price:</Paragraph2>
+      
+                            <Paragraph1>Ksh.{item && item.Pricing}</Paragraph1>
+                          </PriceItem>
+      
+                          <Paragraph>Location:Gender{item && item.Location}</Paragraph>
+                          <Paragraph>Requirements:{item && item.Requirements}</Paragraph>
+                          <Paragraph>Anemities:{item && item.Anemities}</Paragraph>
+                          <Paragraph>Rules:{item && item.Rules}</Paragraph>
+      
+                          <BookButtons>
+      
+                            <Link to='/listing'>  <Buttons >Update</Buttons></Link>
+      
+                            <Link to='/listing'> <Buttons>Delete</Buttons></Link>
+                          </BookButtons>
+                        </Hostels>
+                      );
+                    
+                    
+                  }
+
+                
+                }
+
+               
+              )}
+            </Content>
+          </ViewContainer>
+
+          {/* <h1>This is the Dashboard page</h1> */}
+          <Footer />
+        </>
+      )}
+    </Container>
+  );
 };
 export default Dashboard;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import React, { useEffect, useState, useContext } from "react";
 // import styled from "styled-components";
 // import { Context } from "../State";
 // import { Link } from "react-router-dom";
-
 
 // const Container = styled.div``
 
@@ -299,7 +245,6 @@ export default Dashboard;
 // width:20%;
 // border:none;
 
-
 // `
 
 // const Image = styled.img`
@@ -326,18 +271,16 @@ export default Dashboard;
 //     const [isOpen, setIsOpen] = useState(false);
 //     const [docId, setDocId] = docIdState;
 //     const [loader, setLoader] = loaderState
-  
+
 //     useEffect(() => {
-  
-  
+
 //     }, [])
-  
+
 //     console.log(hostels)
-  
 
 //   return (
 //       <div>
-          
+
 //     <Container>
 
 //       <HomeCover>
@@ -361,7 +304,6 @@ export default Dashboard;
 //                     {/* <Link to={`hostel/${docId[index]}`}><Button >Update</Button></Link>
 //                     <Link to={`hostel/${docId[index]}`}><Button >Delete</Button></Link> */}
 
-
 //               </Hostels>
 //             );
 //           })}
@@ -370,31 +312,9 @@ export default Dashboard;
 
 //       </HomeContainer>
 //     </Container>
-            
 
 //     </div>
 //   )
 // }
 
 // export default Dashboard
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

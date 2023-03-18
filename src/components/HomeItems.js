@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
-
-
+import { addDoc, collection, getDocs } from "firebase/firestore";
+import { db } from "../Firebase";
 
 // import ReactModal from 'react-modal';
 import { Context } from "../State";
@@ -92,12 +92,27 @@ const HomeItems = () => {
   const [docId, setDocId] = docIdState;
   const [loader, setLoader] = loaderState
 
-  useEffect(() => {
+    //   useEffect(() => {
+    //     (async () => {
+    //         // setLoader(true)
+    //         const querySnapshot = await getDocs(collection(db, "hostel"));
+    //         querySnapshot.forEach((doc) => {
+    //             setHostels(prev => ([...prev, doc.data()]))
+    //             setDocId(prev => [...prev, doc.id])
+
+    //             // console.log(doc.id)
+
+    //         });
+    //         // setLoader(false)
+    //     }
+    //     )()
 
 
-  }, [])
+    // }, [])
 
-  console.log(hostels)
+  
+
+  // console.log(hostels)
 
   return (
     <Container>

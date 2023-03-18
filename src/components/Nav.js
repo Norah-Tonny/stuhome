@@ -70,7 +70,7 @@ const Nav = () => {
     const [loader, setLoader] = loaderState
     const [details, setDetails] =detailsState
 
-
+console.log(hostels)
     useEffect(() => {
         (async () => {
             setLoader(true)
@@ -79,7 +79,7 @@ const Nav = () => {
                 setHostels(prev => ([...prev, doc.data()]))
                 setDocId(prev => [...prev, doc.id])
 
-                console.log(doc.id)
+                // console.log(doc.id)
 
             });
             setLoader(false)
@@ -92,7 +92,7 @@ const Nav = () => {
     useEffect(() => {
 
         const itemIndex = docId.indexOf(itemId)
-        console.log(docId)
+        // console.log(docId)
         setItem(hostels[itemIndex])
     }, [docId])
 
@@ -116,7 +116,7 @@ const Nav = () => {
     return (
         <NavContainer>
             <InnerNav>
-                {console.log(user && user.uid)}
+                {/* {console.log(user && user.uid)} */}
 
                 <NavLeft>
                     <LogoContainer>

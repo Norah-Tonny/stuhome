@@ -117,7 +117,7 @@ const BookingModal = ({ isOpen, setIsOpen }) => {
             </Typography>
 
             <Typography1 id="modal-modal-description" sx={{ mt: 2 }}>
-                <Input type="text" placeholder="Ammount" onChange={(e) => setformData({ ...formData, amount: e.target.value })} />
+                <Input type="text" placeholder="Amount" onChange={(e) => setformData({ ...formData, amount: e.target.value })} />
                 <Input type="text" placeholder="Enter phone number" onChange={(e) => setformData({ ...formData, phoneNumber: e.target.value })} />
                 <ButtonConfirm>
                     <Button onClick={payment}>Confirm Payment</Button>
