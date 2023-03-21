@@ -45,12 +45,15 @@ const Newsletter = () => {
 
     return (
         <NewsletterContainer>
+
             <NewsletterHeading>Subscribe to our Newsletter</NewsletterHeading>
             <NewsletterParagraph>Subscribe to our Newsletter for upload of Hostels</NewsletterParagraph>
+            
             <NewsletterEmailButton>
                 <NewsletterEmail type="email" placeholder="Email address" />
-                <NewsletterBUtton>
-                    {<SendIcon />}</NewsletterBUtton>
+                
+                <NewsletterBUtton>{<SendIcon />}</NewsletterBUtton>
+
             </NewsletterEmailButton>
         </NewsletterContainer>
     )

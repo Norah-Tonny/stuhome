@@ -124,8 +124,6 @@ const BookingModal = ({ isOpen, setIsOpen }) => {
                 </ButtonConfirm>
                 <Buttons onClick={() => setIsOpen(false)}>Cancel</Buttons>
 
-
-
             </Typography1>
         </Box>
     )

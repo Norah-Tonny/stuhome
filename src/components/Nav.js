@@ -116,7 +116,6 @@ console.log(hostels)
     return (
         <NavContainer>
             <InnerNav>
-                {/* {console.log(user && user.uid)} */}
 
                 <NavLeft>
                     <LogoContainer>

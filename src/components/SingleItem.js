@@ -12,7 +12,6 @@ import ScheduleModal from "./ScheduleModal";
 import ReviewModal from "./ReviewModal";
 
 const Container = styled.div``;
-const HelpContent = styled.div``;
 
 const ViewContainer = styled.div`
   display: flex;
@@ -32,25 +31,7 @@ const Button = styled.button`
   border: none;
 `;
 
-const Button1 = styled.button`
-  padding: 1em;
-  font-size: 1rem;
-  width: 500%;
-  curser: pointer;
-  background: #cd5888;
-  border-radius: 5px;
-  border: none;
-`;
 
-const Button2 = styled.button`
-  padding: 1em 2em;
-  font-size: 1rem;
-  width: 90%;
-  border: 2px solid #cd5888;
-  curser: pointer;
-  background: whitesmoke;
-  border-radius: 5px;
-`;
 const Buttons = styled.button`
   padding: 1em 2em;
   font-size: 1rem;
@@ -60,30 +41,6 @@ const Buttons = styled.button`
   border: 2px solid #cd5888;
 `;
 
-const Input = styled.input`
-  padding: 1em 2em;
-  width: 70%;
-  border-radius: 5px;
-  background: whitesmoke;
-  border: 2px solid lightGreay;
-  background: transparent;
-`;
-const Typography = styled.div``;
-const Typography1 = styled.div`
-  display: flex;
-  gap: 2em;
-  padding-top: 2em;
-  flex-direction: column;
-  align-items: center;
-`;
-const Box = styled.div`
-  width: 35%;
-  padding: 3em;
-  margin: 0 auto;
-  border-radius: 10px;
-  background: transparent;
-  border: 2px solid lightGrey;
-`;
 
 const ViewText = styled.div`
   display: flex;
@@ -107,19 +64,7 @@ const Hostels = styled.div`
   padding: 3em;
 `;
 const Hostel = styled.div``;
-const Details = styled.div``;
 const HelpDetails = styled.div``;
-const BookingDetails = styled.div`
-  display: flex;
-  gap: 4em;
-  padding-top: 3em;
-  flex-direction: column;
-`;
-const ImageDetails = styled.div``;
-const TextArea = styled.textarea`
-  padding: 2em;
-  width: 80%;
-`;
 
 const Image = styled.img`
   height: 70vh;
@@ -128,7 +73,6 @@ const Image = styled.img`
 const Heading = styled.h3`
   text-align: center;
 `;
-const HelpParagraph = styled.div``;
 const Content = styled.div`
   background: #fff;
 `;
@@ -141,13 +85,6 @@ const Paragraph1 = styled.p`
   font-size: 1.2em;
 `;
 
-const ButtonConfirm = styled.div`
-  margin-right: 25em;
-`;
-const HeadingMethod = styled.h2`
-  text-align: center;
-  margin-bottom: 1em;
-`;
 
 const Paragraph2 = styled.p`
   font-size: 1.2em;
@@ -207,7 +144,7 @@ const SingleItem = () => {
                             <Heading>Booking Details</Heading>
 
                             <Paragraph>Hostel:{item && item.Hostel}</Paragraph>
-                            <Paragraph>Gender:{item && item.Gender}</Paragraph>
+                            <Paragraph>Position:{item && item.Position}</Paragraph>
                             <Paragraph>Agent:{item && item.Agent}</Paragraph>
                             <Paragraph>About the hostel:{item && item.About}</Paragraph>
                             <PriceItem>

@@ -8,12 +8,12 @@ import { db } from "../Firebase";
 import { ref, uploadString, uploadBytes } from "firebase/storage";
 import { addDoc, collection } from "firebase/firestore";
 import { storage } from "../Firebase";
-
 import Footer from "./Footer";
-import userEvent from "@testing-library/user-event";
+
+
+
 const Container = styled.div`
 background:whitesmoke;
-
 `
 const TextInput = styled.input`
 padding: 1.5em;
@@ -40,7 +40,6 @@ flex-direction:column;
 padding:5em;
 gap:2em;
 width:50%;
-// border:2px solid red;
 `
 
 const TextArea = styled.textarea`
