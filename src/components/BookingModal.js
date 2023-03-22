@@ -66,7 +66,7 @@ margin-bottom:1em;`
 
 const BookingModal = ({ isOpen, setIsOpen }) => {
     const [formData, setformData] = useState({
-        phoneNumber: "",
+        phone: "",
         amount: "",
     })
 
@@ -76,7 +76,7 @@ const BookingModal = ({ isOpen, setIsOpen }) => {
 
             console.log("Hello")
 
-            const url = "https://stumpesa.onrender.com/api/stk/push"
+            const url = "https://mpesampesa.onrender.com/api/stk/push"
 
 
             const options = {
@@ -86,7 +86,7 @@ const BookingModal = ({ isOpen, setIsOpen }) => {
 
             }
 
-
+  
             const paymentRequest = await fetch(url, options)
 
 
@@ -118,7 +118,7 @@ const BookingModal = ({ isOpen, setIsOpen }) => {
 
             <Typography1 id="modal-modal-description" sx={{ mt: 2 }}>
                 <Input type="text" placeholder="Amount" onChange={(e) => setformData({ ...formData, amount: e.target.value })} />
-                <Input type="text" placeholder="Enter phone number" onChange={(e) => setformData({ ...formData, phoneNumber: e.target.value })} />
+                <Input type="text" placeholder="Enter phone number" onChange={(e) => setformData({ ...formData, phone: e.target.value })} />
                 <ButtonConfirm>
                     <Button onClick={payment}>Confirm Payment</Button>
                 </ButtonConfirm>

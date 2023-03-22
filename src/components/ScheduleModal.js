@@ -18,7 +18,8 @@ border:none;`
 const HeadingMethod = styled.h2``
 
 const Paragraph = styled.p`
-font-size:1.1em;`
+
+`
 
 const Buttons = styled.button`
 padding:1em;

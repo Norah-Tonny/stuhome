@@ -96,86 +96,86 @@ const Loader = styled.img`
 `;
 
 const SingleItem = () => {
-    const { itemState, hostelState, docIdState, itemIdState, loaderState } =
-        useContext(Context);
-    const [hostels, setHostels] = hostelState;
-    const [itemId, setItemId] = itemIdState;
-    const [docId, setDocId] = docIdState;
-    const [item, setItem] = itemState;
-    const [loader, setLoader] = loaderState;
-    const [isOpen, setIsOpen] = useState(false);
-    const [openReview, setOpenReview] = useState(false);
-    const [openSchedule, setOpenSchedule] = useState(false);
+  const { itemState, hostelState, docIdState, itemIdState, loaderState } =
+    useContext(Context);
+  const [hostels, setHostels] = hostelState;
+  const [itemId, setItemId] = itemIdState;
+  const [docId, setDocId] = docIdState;
+  const [item, setItem] = itemState;
+  const [loader, setLoader] = loaderState;
+  const [isOpen, setIsOpen] = useState(false);
+  const [openReview, setOpenReview] = useState(false);
+  const [openSchedule, setOpenSchedule] = useState(false);
 
-    const { id } = useParams();
+  const { id } = useParams();
 
-    useEffect(() => {
-        setItemId(id);
-    }, []);
+  useEffect(() => {
+    setItemId(id);
+  }, []);
 
-    console.log(itemId);
+  console.log(itemId);
 
-    return (
-        <Container>
-            {isOpen && <BookingModal isOpen={isOpen} setIsOpen={setIsOpen} />}
-            {openSchedule && (
-                <ScheduleModal
-                    openSchedule={openSchedule}
-                    setOpenSchedule={setOpenSchedule}
-                />
-            )}
-            {openReview && (
-                <ReviewModal openReview={openReview} setOpenReview={setOpenReview} />
-            )}
-            <Nav />
-            {loader && <Loader src="/loaders/loader.gif" />}
-            <ViewContainer>
-                <HelpDetails>
-                    <ViewText>
-                        <Hostel id="Hostel">
-                            <Image src={item && item.Image} />
-                        </Hostel>
-                    </ViewText>
-                </HelpDetails>
+  return (
+    <Container>
+      {isOpen && <BookingModal isOpen={isOpen} setIsOpen={setIsOpen} />}
+      {openSchedule && (
+        <ScheduleModal
+          openSchedule={openSchedule}
+          setOpenSchedule={setOpenSchedule}
+        />
+      )}
+      {openReview && (
+        <ReviewModal openReview={openReview} setOpenReview={setOpenReview} />
+      )}
+      <Nav />
+      {loader && <Loader src="/loaders/loader.gif" />}
+      <ViewContainer>
+        <HelpDetails>
+          <ViewText>
+            <Hostel id="Hostel">
+              <Image src={item && item.Image} />
+            </Hostel>
+          </ViewText>
+        </HelpDetails>
 
-                <Content>
-                    <ViewText>
-                        <Hostels id="Hostel">
-                            <Heading>Booking Details</Heading>
+        <Content>
+          <ViewText>
+            <Hostels id="Hostel">
+              <Heading>Booking Details</Heading>
 
-                            <Paragraph>Hostel:{item && item.Hostel}</Paragraph>
-                            <Paragraph>Position:{item && item.Position}</Paragraph>
-                            <Paragraph>Agent:{item && item.Agent}</Paragraph>
-                            <Paragraph>About the hostel:{item && item.About}</Paragraph>
-                            <PriceItem>
-                                <Paragraph2>Price:</Paragraph2>
+              <Paragraph>Hostel:{item && item.Hostel}</Paragraph>
+              <Paragraph>Position:{item && item.Position}</Paragraph>
+              <Paragraph>Agent:{item && item.Agent}</Paragraph>
+              <Paragraph>About the hostel:{item && item.About}</Paragraph>
+              <PriceItem>
 
-                                <Paragraph1>Ksh.{item && item.Pricing}</Paragraph1>
-                            </PriceItem>
+                <Paragraph2>Price:</Paragraph2>
+                <Paragraph1>Ksh.{item && item.Pricing}</Paragraph1>
 
-                            <Paragraph>Location:Gender{item && item.Location}</Paragraph>
-                            <Paragraph>Requirements:{item && item.Requirements}</Paragraph>
-                            <Paragraph>Anemities:{item && item.Anemities}</Paragraph>
-                            <Paragraph>Rules:{item && item.Rules}</Paragraph>
+              </PriceItem>
+              <Paragraph>Location:Gender{item && item.Location}</Paragraph>
+              <Paragraph>Requirements:{item && item.Requirements}</Paragraph>
+              <Paragraph>Anemities:{item && item.Anemities}</Paragraph>
+              <Paragraph>Rules:{item && item.Rules}</Paragraph>
 
-                            <BookButtons>
-                                <Button onClick={() => setIsOpen(true)}>Book</Button>
+              <BookButtons>
+                <Button onClick={() => setIsOpen(true)}>Book</Button>
 
-                                <Buttons onClick={() => setOpenSchedule(true)}>
-                                    Schedule a visit
-                                </Buttons>
+                <Buttons onClick={() => setOpenSchedule(true)}>
+                  Schedule a visit
+                </Buttons>
 
-                                <Buttons onClick={() => setOpenReview(true)}>
-                                    Post review
-                                </Buttons>
-                            </BookButtons>
-                        </Hostels>
-                    </ViewText>
-                </Content>
-            </ViewContainer>
+                <Buttons onClick={() => setOpenReview(true)}>
+                  Post review
+                </Buttons>
+              </BookButtons>
+            </Hostels>
+          </ViewText>
+        </Content>
+      </ViewContainer>
 
-            <Footer />
-        </Container>
-    );
+      <Footer />
+    </Container>
+  );
 };
 export default SingleItem;

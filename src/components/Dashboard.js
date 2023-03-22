@@ -151,14 +151,12 @@ const Dashboard = () => {
   
                     
                      <DashboardContent>
+                          <Paragraph>Hostel:{item && item.Hostel}</Paragraph>
+                          <Paragraph>About the hostel:{item && item.About}</Paragraph>
                           <Paragraph>Location:{hostel.Location}</Paragraph>
                           <Paragraph>Ksh.{hostel.Pricing}</Paragraph>
-                        
-                          <Paragraph>Hostel:{item && item.Hostel}</Paragraph>
                           <Paragraph>Position:{item && item.Position}</Paragraph>
                           <Paragraph>Agent:{item && item.Agent}</Paragraph>
-                          <Paragraph>About the hostel:{item && item.About}</Paragraph>
-      
                           <Paragraph>Location:Gender{item && item.Location}</Paragraph>
                           <Paragraph>Requirements:{item && item.Requirements}</Paragraph>
                           <Paragraph>Anemities:{item && item.Anemities}</Paragraph>
@@ -170,7 +168,7 @@ const Dashboard = () => {
       
                             <Link to='/listing'> <Buttons>Delete</Buttons></Link>
 
-                            <Link to='/listing'> <Button>Cancel</Button></Link>
+                            <Link to=""> <Button>Cancel</Button></Link>
 
                           </BookButtons>
                         </DashboardContent>
