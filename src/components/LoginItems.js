@@ -211,8 +211,8 @@ const LoginItems = () => {
   
             <PasswordContainer>
                     <InputShowFlex>
-              <PasswordInput  type='password' placeholder='Password' onChange={(e) => setPassword(e.target.value)}  />
-                        <ShowPassword onClick={()=>setValues(prev=>!prev)}>{values?<VisibilityIcon/>:<VisibilityOffIcon/>}</ShowPassword>
+              <PasswordInput  type={show? "text": 'password'} placeholder='Password' onChange={(e) => setPassword(e.target.value)}  />
+                        <ShowPassword onClick={()=>setShow(prev=>!prev)}>{show?<VisibilityIcon/>:<VisibilityOffIcon/>}</ShowPassword>
 
                     </InputShowFlex>
                 </PasswordContainer>    

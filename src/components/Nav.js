@@ -4,6 +4,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import { db } from "../Firebase";
 import { Context } from "../State";
+import { Navigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 const NavContainer = styled.div`
@@ -61,16 +62,16 @@ const NavLeft = styled.div``
 
 const Nav = () => {
 
-    const { hostelState, docIdState, itemState, itemIdState, loaderState, userState,detailsState } = useContext(Context)
+    const { hostelState, docIdState, itemState, itemIdState, loaderState, userState, detailsState } = useContext(Context)
     const [hostels, setHostels] = hostelState
     const [user, setUser] = userState
     const [itemId, setItemId] = itemIdState
     const [docId, setDocId] = docIdState
     const [item, setItem] = itemState
     const [loader, setLoader] = loaderState
-    const [details, setDetails] =detailsState
+    const [details, setDetails] = detailsState
 
-console.log(hostels)
+    console.log(hostels)
     useEffect(() => {
         (async () => {
             setLoader(true)
@@ -98,31 +99,29 @@ console.log(hostels)
 
 
     useEffect(() => {
-        
+
         const loggedInUser = JSON.parse(localStorage.getItem("user"));
         console.log(loggedInUser)
         if (loggedInUser) {
-          setUser(loggedInUser)
-          setDetails(prev=>({...prev, uid:loggedInUser.uid}))
+            setUser(loggedInUser)
+            setDetails(prev => ({ ...prev, uid: loggedInUser.uid }))
         }
 
-      
-      }, [])
 
-
+    }, [])
 
 
     const [isOpen, setIsOpen] = useState(false)
     return (
+
         <NavContainer>
+
             <InnerNav>
 
                 <NavLeft>
                     <LogoContainer>
 
                         <Logo><Link to="/">Stuhome</Link> </Logo>
-
-
 
                     </LogoContainer>
                 </NavLeft>
@@ -142,7 +141,6 @@ console.log(hostels)
 
                     </NavUl>
                 </NavRight>
-
 
             </InnerNav>
 

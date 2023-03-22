@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { db } from "../Firebase";
 import { collection, addDoc } from "firebase/firestore";
 import { Link } from "@mui/material";
@@ -19,15 +19,12 @@ const SignUpItemsContainer = styled.div`
  text-align:center;`;
 
 
-const Input = styled.div`
- width:300px;
- background:;`
 
 const SignUpHeading = styled.h1``;
 
 const SignUpInput = styled.input`
    padding: 2em;
-   width:30%;
+   width:245%;
   border-radius: 5px;
   border:none;
   box-shadow:0 0 3px 1px gray;
@@ -60,7 +57,8 @@ display: flex;
 align-items:center;
 width:100%;
 `
-const SignUpSubmit = styled.div``
+const SignUpSubmit = styled.div`
+margin-right:5em;`
 
 const Button = styled.button`
 padding:1em;
@@ -72,7 +70,12 @@ margin:2em 2em;
 background:#CD5888;
 border:none;
 `;
-
+const Inputs = styled.div`
+display:flex;
+flex-direction:column;
+gap:2em;
+margin-right:25em;
+`
 
 const P = styled.p``;
 
@@ -85,10 +88,10 @@ align-items:center;
 
 const SignUpItems = () => {
 
-  const { emailState,passwordState } =useContext(Context);
-    const [email, setEmail] = emailState;
+  const { emailState, passwordState } = useContext(Context);
+  const [email, setEmail] = emailState;
   const [password, setPassword] = passwordState;
-  
+  const [showIcon, setShowIcon] = useState(false)
   const [values, setValues] = useState({
     FirstName: "",
     LastName: "",
@@ -97,7 +100,7 @@ const SignUpItems = () => {
     Email: "",
     Password: "",
   });
- 
+
 
   const [message, setMessage] = useState({
     message: ""
@@ -131,7 +134,7 @@ const SignUpItems = () => {
         return setError("Select one");
       }
 
-      
+
 
 
 
@@ -160,7 +163,7 @@ const SignUpItems = () => {
 
   function handleUser(e) {
 
-  e.preventDefault()
+    e.preventDefault()
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in 
@@ -169,7 +172,7 @@ const SignUpItems = () => {
         console.log(user)
 
 
-        alert    ("succesfully registered")
+        alert("succesfully registered")
         // ...
       })
 
@@ -179,7 +182,7 @@ const SignUpItems = () => {
         console.log(errorMessage)
         // ..
       });
-}
+  }
 
 
 
@@ -195,26 +198,36 @@ const SignUpItems = () => {
         <select
           value={values.select} onChange={(e) => { setValues({ ...values, select: e.target.value }) }}
           name="identity" id="identity-select"
-          style={{ width: "33%", padding: "1.5em", marginBottom: "2em" }}>
+          style={{
+            width: "33%",
+            padding: "2em",
+            marginBottom: "3em",
+            borderRadius: "5px",
+            border: "none",
+            boxShadow: "0 0 3px 1px gray",
+            outline: "none"
+          }}>
           <option value="">Are you a student or a landlord?</option>
           <option value="Student">student</option>
           <option value="Landloard">Landlord</option>
 
         </select>
 
+        <Inputs>
+          <SignUpInput value={values.FirstName} type="text" placeholder="First Name" onChange={(e) => { setValues({ ...values, FirstName: e.target.value }) }} />
 
-        <SignUpInput value={values.FirstName} type="text" placeholder="First Name" onChange={(e) => { setValues({ ...values, FirstName: e.target.value }) }} />
+          <SignUpInput value={values.LastName} type="text" placeholder="Last Name" onChange={(e) => { setValues({ ...values, LastName: e.target.value }) }} />
 
-        <SignUpInput value={values.LastName} type="text" placeholder="Last Name" onChange={(e) => { setValues({ ...values, LastName: e.target.value }) }} />
+          <SignUpInput value={values.Contact} type="contact" placeholder="Contact" onChange={(e) => { setValues({ ...values, Contact: e.target.value }) }} />
+          <SignUpInput type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
 
-        <SignUpInput value={values.Contact} type="contact" placeholder="Contact" onChange={(e) => { setValues({ ...values, Contact: e.target.value }) }} />
+        </Inputs>
 
 
-        <SignUpInput  type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
         <PasswordContainer>
           <InputShowFlex>
-            <PasswordInput  type='password' placeholder='Password' onChange={(e) => setPassword(e.target.value)} />
-            <ShowPassword onClick={() => setValues(prev => !prev)}>{values ? <VisibilityIcon /> : <VisibilityOffIcon />}</ShowPassword>
+            <PasswordInput type={showIcon ? "text" : 'password'} placeholder='Password' onChange={(e) => setPassword(e.target.value)} />
+            <ShowPassword onClick={() => setShowIcon(prev => !prev)}>{showIcon ? <VisibilityIcon /> : <VisibilityOffIcon />}</ShowPassword>
 
           </InputShowFlex>
         </PasswordContainer>
@@ -222,7 +235,7 @@ const SignUpItems = () => {
         <P style={{ color: "red" }}>{error}</P>
 
         <SignUpSubmit>
-          <Link to="/login"> <Button onClick={(e)=>handleUser(e)}>Sign Up </Button></Link>
+          <Link to="/login"> <Button onClick={(e) => handleUser(e)}>Sign Up </Button></Link>
 
 
         </SignUpSubmit>

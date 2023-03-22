@@ -38,16 +38,17 @@ margin:1em;
 `
 const Newsletter = () => {
 
-    // const [subscription, setSubscription] = useState({
-    //     email: "",
-    // } )
+    const [subscription, setSubscription] = useState({
+        email: "",
+        
+    } )
 
 
     return (
         <NewsletterContainer>
 
             <NewsletterHeading>Subscribe to our Newsletter</NewsletterHeading>
-            <NewsletterParagraph>Subscribe to our Newsletter for upload of Hostels</NewsletterParagraph>
+            <NewsletterParagraph>Subscribe to our newsletter for upload of new hostels</NewsletterParagraph>
             
             <NewsletterEmailButton>
                 <NewsletterEmail type="email" placeholder="Email address" />

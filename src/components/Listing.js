@@ -8,6 +8,7 @@ import { db } from "../Firebase";
 import { ref, uploadString, uploadBytes } from "firebase/storage";
 import { addDoc, collection } from "firebase/firestore";
 import { storage } from "../Firebase";
+import { Navigate } from "react-router-dom";
 import Footer from "./Footer";
 
 
@@ -59,7 +60,7 @@ margin:.5m;
 
 
 const Button = styled.button`
-padding:1em 2em;
+padding:1em 4em;
 font-size:1rem;
 curser:pointer;
 background:#CD5888;
@@ -192,39 +193,48 @@ console.log(file.name)
   return (
 
     <Container>
-      <Nav />
-      <Form>
-        {console.log(user.uid)}
-        <FormHeading>Listing</FormHeading>
 
-        <TextInput type='text' value={details.Hostel} placeholder="Hostel Name" onChange={(e) => { setDetails({ ...details, Hostel: e.target.value }) }} />
-           
-        <TextArea type="Text" value={details.About}  placeholder="About the Hostel"onChange={(e) => { setDetails({ ...details, About: e.target.value }) }}/> 
-        
-        <Paragraph>Upload Image</Paragraph>
-                  
-        <FormInput type='file' value={details.file}  placeholder="Image" onChange={(e) => uploadFile(e)} />
 
-            <TextArea type='text' value={details.Position}  placeholder="House Position" onChange={(e) => { setDetails({ ...details, Position: e.target.value }) }} />
-          
-            <TextArea type='text' value={details.Agent}  placeholder="Agent Name" onChange={(e) => { setDetails({ ...details, Agent: e.target.value }) }} />
 
-            <TextArea type='text' value={details.Location}  placeholder="Location" onChange={(e) => { setDetails({ ...details, Location : e.target.value }) }} />
-
-            <FormInput type='number' value={details.Pricing} placeholder="Rent" onChange={(e) => { setDetails({ ...details,Pricing: e.target.value }) }} />
-     
-            <TextArea type='text' value={details.Requirements}  placeholder="Requirements" onChange={(e) => { setDetails({ ...details, Requirements: e.target.value }) }} />
-    
-              <TextArea type='text' value={details.Anemities}  placeholder="Anemities" onChange={(e) => { setDetails({ ...details, Anemities: e.target.value }) }} />
-  
-            <TextArea type='text' value={details.Rules}  placeholder="House Rules" onChange={(e) => { setDetails({ ...details, Rules: e.target.value }) }} />
+      {/* {!user ? (
+        <Navigate to="/login" replace />
+      ) : (
+        <> */}
       
-        <Button onClick={(e) => listingSubmit(e)}>Post</Button>
+          <Nav />
+          <Form>
+            {console.log(user.uid)}
+            <FormHeading>Listing</FormHeading>
 
-      </Form>
+            <TextInput type='text' value={details.Hostel} placeholder="Hostel Name" onChange={(e) => { setDetails({ ...details, Hostel: e.target.value }) }} />
+           
+            <TextArea type="Text" value={details.About} placeholder="About the Hostel" onChange={(e) => { setDetails({ ...details, About: e.target.value }) }} />
+        
+            <Paragraph>Upload Image</Paragraph>
+                  
+            <FormInput type='file' value={details.file} placeholder="Image" onChange={(e) => uploadFile(e)} />
+
+            <TextArea type='text' value={details.Position} placeholder="House Position" onChange={(e) => { setDetails({ ...details, Position: e.target.value }) }} />
+          
+            <TextArea type='text' value={details.Agent} placeholder="Agent Name" onChange={(e) => { setDetails({ ...details, Agent: e.target.value }) }} />
+
+            <TextArea type='text' value={details.Location} placeholder="Location" onChange={(e) => { setDetails({ ...details, Location: e.target.value }) }} />
+
+            <FormInput type='number' value={details.Pricing} placeholder="Rent" onChange={(e) => { setDetails({ ...details, Pricing: e.target.value }) }} />
      
-      <Footer />
+            <TextArea type='text' value={details.Requirements} placeholder="Requirements" onChange={(e) => { setDetails({ ...details, Requirements: e.target.value }) }} />
+    
+            <TextArea type='text' value={details.Anemities} placeholder="Anemities" onChange={(e) => { setDetails({ ...details, Anemities: e.target.value }) }} />
+  
+            <TextArea type='text' value={details.Rules} placeholder="House Rules" onChange={(e) => { setDetails({ ...details, Rules: e.target.value }) }} />
+      
+            <Button onClick={(e) => listingSubmit(e)}>Post</Button>
 
+          </Form>
+     
+          <Footer />
+        {/* </>
+      )} */}
     </Container>
   )
 }
