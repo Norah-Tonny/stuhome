@@ -1,4 +1,4 @@
-import { useState,useContext,useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import { db } from "../Firebase";
 import { addDoc, collection } from "firebase/firestore";
 import { json, Link } from "react-router-dom";
@@ -8,7 +8,6 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Context } from "../State";
 import { auth } from "../Firebase";
-// import { useContext } from "react";
 
 
 const LoginContainer = styled.div`
@@ -19,7 +18,7 @@ paddingborder-radius:5px;
 display: flex; 
 justify-content: space-between;
  gap: 2em; 
- padding: 1em;
+ padding: 1em;                           
   width: 85%;
    margin: 0 auto;
  `;
@@ -96,14 +95,13 @@ border-radius:5px;
 padding:1.3em;
 `;
 
-const LoginInput = styled.input`
-
-`;
+const LoginInput = styled.input``;
 
 const LoginParagraph = styled.p`
 font-size:1em;
 margin-right:3em;
 `;
+
 const InnerContainer = styled.div`
 border:3px solid #CD5888;
 text-align:center;
@@ -133,19 +131,14 @@ align-items:center;
 `
 const P = styled.p``;
 
-
-
-
 const LoginItems = () => {
-  // const { isLogged } = useContext(Context)
-  // const [isLogin, setLogin] = isLogged
-
-  const {emailState, passwordState} = useContext(Context);
+  const { emailState, passwordState, userOn } = useContext(Context);
   const [isOpen, setIsOpen] = useState(false);
   const [show, setShow] = useState(false)
-     const [email, setEmail] = emailState;
+  const [email, setEmail] = emailState;
   const [password, setPassword] = passwordState;
-  
+  const [isLoggedIn, setIsLoggedIn] = userOn
+
 
   const [values, setValues] = useState({
     email: "",
@@ -156,47 +149,39 @@ const LoginItems = () => {
 
   console.log(error)
 
-
-  
-
   const handleLogin = (event) => {
+    const { email, password } = values
     event.preventDefault();
     try {
-     
+
       if (values.email === "") {
         return setError("Please enter your email address")
       }
 
       if (values.password === "") {
-       return  setError("Please enter your password")
+        return setError("Please enter your password")
       }
 
-     else {
-       
-        console.log(error);
-      }
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in 
+          const user = userCredential.user;
+          console.log(user)
+          if (user) {
+            setIsLoggedIn(true)
+          }
+          localStorage.setItem("user", JSON.stringify(user))
+
+          console.log(error);
+        })
+
+
     }
     catch (error) {
       console.log("error fill in the correct information", error);
 
     }
-  }
 
-  const user = () =>{
-  signInWithEmailAndPassword(auth, email, password)
-.then((userCredential) => {
-  // Signed in 
-  const user = userCredential.user;
-  console.log(user)
-  localStorage.setItem("user",JSON.stringify(user))
-  // ...
-})
-.catch((error) => {
-  const errorCode = error.code;
-  const errorMessage = error.message;
-});
-
-    
   }
 
   return (
@@ -207,28 +192,26 @@ const LoginItems = () => {
         <LoginHeading>Login</LoginHeading>
         <Form>
           <Inputs>
-            <LoginInputs  type="email" placeholder="email" onChange={(e) =>setEmail(e.target.value) } />
-  
-            <PasswordContainer>
-                    <InputShowFlex>
-              <PasswordInput  type={show? "text": 'password'} placeholder='Password' onChange={(e) => setPassword(e.target.value)}  />
-                        <ShowPassword onClick={()=>setShow(prev=>!prev)}>{show?<VisibilityIcon/>:<VisibilityOffIcon/>}</ShowPassword>
+            <LoginInputs type="email" placeholder="email" onChange={(e) => setValues(prev => ({ ...prev, email: e.target.value }))} />
 
-                    </InputShowFlex>
-                </PasswordContainer>    
-              <P style={{ color: "red" }}>{error}</P>
+            <PasswordContainer>
+              <InputShowFlex>
+                <PasswordInput type={show ? "text" : 'password'} placeholder='Password' onChange={(e) => setValues(prev => ({ ...prev, password: e.target.value }))} />
+                <ShowPassword onClick={() => setShow(prev => !prev)}>{show ? <VisibilityIcon /> : <VisibilityOffIcon />}</ShowPassword>
+
+              </InputShowFlex>
+            </PasswordContainer>
+            <P style={{ color: "red" }}>{error}</P>
 
           </Inputs>
 
 
-          <LoginCheck>
+          {/* <LoginCheck>
             <LoginInput type="checkbox" />Remember me.
             <LoginPara>Forgot Password?</LoginPara>
-          </LoginCheck>
+          </LoginCheck> */}
 
-
-          <Link to='/'><Button onClick={user}>Login</Button> </Link>
-
+          <Link to="/listing"><Button onClick={handleLogin}>Login</Button></Link>
 
         </Form>
       </LoginDetails>
@@ -236,7 +219,6 @@ const LoginItems = () => {
       <LoginLeft>
         <Paragraph> Host your stuhome.</Paragraph>
       </LoginLeft>
-
 
 
     </LoginContainer>

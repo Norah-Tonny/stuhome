@@ -85,7 +85,6 @@ const Paragraph1 = styled.p`
   font-size: 1.2em;
 `;
 
-
 const Paragraph2 = styled.p`
   font-size: 1.2em;
 `;
@@ -93,6 +92,8 @@ const Paragraph2 = styled.p`
 const Loader = styled.img`
   display: block;
   margin: 0 auto;
+  translate(50%,50%)
+  margin-top:30em;
 `;
 
 const SingleItem = () => {
@@ -150,7 +151,7 @@ const SingleItem = () => {
               <PriceItem>
 
                 <Paragraph2>Price:</Paragraph2>
-                <Paragraph1>Ksh.{item && item.Pricing}</Paragraph1>
+                <Paragraph1>Ksh.{item && item.Pricing}</Paragraph1> 
 
               </PriceItem>
               <Paragraph>Location:Gender{item && item.Location}</Paragraph>

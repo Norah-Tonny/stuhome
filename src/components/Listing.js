@@ -1,5 +1,5 @@
 import { Label } from "@mui/icons-material";
-import { Select } from "@mui/material";
+import { Link, Select } from "@mui/material";
 import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import Nav from "./Nav"
@@ -196,10 +196,10 @@ console.log(file.name)
 
 
 
-      {/* {!user ? (
+      {!user ? (
         <Navigate to="/login" replace />
       ) : (
-        <> */}
+        <>
       
           <Nav />
           <Form>
@@ -228,13 +228,13 @@ console.log(file.name)
   
             <TextArea type='text' value={details.Rules} placeholder="House Rules" onChange={(e) => { setDetails({ ...details, Rules: e.target.value }) }} />
       
-            <Button onClick={(e) => listingSubmit(e)}>Post</Button>
+            <Link to="/dashboard"><Button onClick={(e) => listingSubmit(e)}>Post</Button></Link>
 
           </Form>
      
           <Footer />
-        {/* </>
-      )} */}
+        </>
+      )}
     </Container>
   )
 }

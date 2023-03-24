@@ -5,7 +5,6 @@ import { useState } from 'react'
 // import addNotification from 'react-push-notification';
 //  import { Notifications } from 'react-push-notification';
 
-
 const Button = styled.button`
 padding:1em ;
 font-size:1rem;
@@ -59,7 +58,6 @@ width:80%;`
 const Paragraph = styled.p`
 font-size:1.1em;`
 
-
 const ButtonConfirm = styled.div`
 margin-right:33em;
 `
@@ -68,19 +66,8 @@ const HeadingMethod = styled.h2`
 text-align:center;
 `
 
-
 const ReviewModal = ({ openReview, setOpenReview }) => {
-//    const successNotification = ()=>{
-//         addNotification({
-//         //   title: 'Success',
-//           title: 'You have successfully post a review',
-//           message: 'Welcome to stuhome',
-//           theme: 'light',
-//           closeButton:"X",
-//           backgroundTop:"green",
-//           backgroundBottom:"yellowgreen"
-//         })
-//       };
+
     return (
 
 
@@ -96,8 +83,8 @@ const ReviewModal = ({ openReview, setOpenReview }) => {
                 <TextArea placeholder="Enter a review" />
 
                 < ButtonConfirm >
-                   <Button >Post</Button>
-              </ButtonConfirm>
+                    <Button >Post</Button>
+                </ButtonConfirm>
 
                 <Buttons onClick={() => setOpenReview(false)}>Cancel</Buttons>
 

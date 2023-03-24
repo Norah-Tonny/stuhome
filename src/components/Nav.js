@@ -11,6 +11,7 @@ const NavContainer = styled.div`
 background:#CD5888;
 height:15vh;
 `
+
 const InnerNav = styled.div`
 margin:0 auto;
 width:70%;  
@@ -29,8 +30,16 @@ margin-top:4em;
 const NavList = styled.li`
 font-size:1rem;
 color:black;
+gap:3em;
 font-weight:bold;`
 
+const NavList1 = styled.li`
+font-size:1rem;
+color:black;
+font-weight:bold;
+display:flex;
+gap:3em;
+flex-direction:row;`
 
 const Logo = styled.h1`
 padding-left:.5em;
@@ -52,9 +61,7 @@ curser:pointer;
 border:2px solid #CD5888;
 background:whitesmoke;
 border-radius:5px;
-
 `
-
 
 const NavRight = styled.div``
 
@@ -62,7 +69,7 @@ const NavLeft = styled.div``
 
 const Nav = () => {
 
-    const { hostelState, docIdState, itemState, itemIdState, loaderState, userState, detailsState } = useContext(Context)
+    const { hostelState, docIdState, itemState, itemIdState, loaderState, userState, detailsState, userOn } = useContext(Context)
     const [hostels, setHostels] = hostelState
     const [user, setUser] = userState
     const [itemId, setItemId] = itemIdState
@@ -70,6 +77,12 @@ const Nav = () => {
     const [item, setItem] = itemState
     const [loader, setLoader] = loaderState
     const [details, setDetails] = detailsState
+    // const navigate = useNavigate();
+    const [isLoggedIn, setIsLoggedIn] = userOn
+    // useEffect(() => {
+    //     checkLogin()
+    // }, []);
+
 
     console.log(hostels)
     useEffect(() => {
@@ -89,6 +102,7 @@ const Nav = () => {
 
 
     }, [])
+
 
     useEffect(() => {
 
@@ -126,25 +140,32 @@ const Nav = () => {
                     </LogoContainer>
                 </NavLeft>
 
-                <NavRight>
+                {/* {!isLoggedIn? (): ()}  */}
+
+                {
+                !isLoggedIn ? <NavRight>
+                    <NavUl>
+                    <NavList> <Link to="/login">Login</Link></NavList>
+                    <NavList><Link to="/signup">SignUp</Link> </NavList>
+                    <NavList><Link to="/help">Help</Link> </NavList>
+                </NavUl>
+                </NavRight>
+                    : <NavRight>
 
                     <NavUl>
-                        <NavList> <Link to="/dashboard">Dashboard</Link></NavList>
-                        <NavList> <Link to="/login">Login</Link></NavList>
-                        <NavList><Link to="/signup">SignUp</Link> </NavList>
-                        <NavList><Link to="/help">Help</Link> </NavList>
-
-                        <NavList>
-                            <Link to="/Listing"> <Button onClick={() => setIsOpen(true)}>Add Listing</Button></Link>
-
-                        </NavList>
-
+                        <NavList1>
+                        <Link to="/dashboard"> <NavList>Dashboard</NavList></Link>
+                            <Link to="/Listing"> <Button onClick={() => setIsOpen(true)} >Add Listing</Button></Link>
+                               <Link to ="/logout"><Button onClick={() => setIsLoggedIn(false)} onClick={() => setIsOpen(true)} >Log out</Button></Link> 
+                                
+                        </NavList1>
                     </NavUl>
-                </NavRight>
+                    </NavRight>
+                }
+                
+            </InnerNav >
 
-            </InnerNav>
-
-        </NavContainer>
+        </NavContainer >
     )
 }
 export default Nav;

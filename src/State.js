@@ -13,6 +13,7 @@ const State = ({ children }) => {
     const [password, setPassword] = useState('');
     const [update, setUpdate] = useState('');
     const [user, setUser] = useState('');
+    const[isLoggedIn, setIsLoggedIn] = useState(false)
     const [details, setDetails] = useState({
         Hostel: "",
         Image: "",
@@ -29,7 +30,7 @@ const State = ({ children }) => {
 
 
     return (
-        <Context.Provider value={{ itemState: [item, setItem], detailsState: [details, setDetails], hostelState: [hostels, setHostels], docIdState: [docId, setDocId], userState: [user, setUser], itemIdState: [itemId, setItemId], loaderState: [loader, setLoader], emailState: [email, setEmail], passwordState: [password, setPassword] }}>
+        <Context.Provider value={{ itemState: [item, setItem], detailsState: [details, setDetails], hostelState: [hostels, setHostels], docIdState: [docId, setDocId], userState: [user, setUser], itemIdState: [itemId, setItemId], loaderState: [loader, setLoader], emailState: [email, setEmail], passwordState: [password, setPassword], userOn:[isLoggedIn, setIsLoggedIn] }}>
 
             {children}
 

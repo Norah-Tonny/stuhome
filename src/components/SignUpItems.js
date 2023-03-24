@@ -235,7 +235,7 @@ const SignUpItems = () => {
         <P style={{ color: "red" }}>{error}</P>
 
         <SignUpSubmit>
-          <Link to="/login"> <Button onClick={(e) => handleUser(e)}>Sign Up </Button></Link>
+          <Link to="/login"><Button onClick={(e) => handleUser(e)}>Sign Up</Button></Link>
 
 
         </SignUpSubmit>

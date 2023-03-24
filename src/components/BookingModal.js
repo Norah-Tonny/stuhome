@@ -47,14 +47,10 @@ border:2px solid  lightGrey;
 position:absolute;
 top:50%;
 left:50%;
-transform:translate(-50%,-50%) ;
-
-`
+transform:translate(-50%,-50%);`
 
 const ButtonConfirm = styled.div`
- margin-right: 21em;
-
- `
+ margin-right: 21em;`
 
 const Paragraph = styled.p`
 font-size:1.1em;`
@@ -86,10 +82,7 @@ const BookingModal = ({ isOpen, setIsOpen }) => {
 
             }
 
-  
             const paymentRequest = await fetch(url, options)
-
-
 
             // const res = await paymentRequest.json()
 
@@ -99,13 +92,6 @@ const BookingModal = ({ isOpen, setIsOpen }) => {
         }
 
     }
-
-
-
-
-
-
-
 
     return (
         <Box sx={styled}>
