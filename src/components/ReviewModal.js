@@ -70,7 +70,6 @@ const ReviewModal = ({ openReview, setOpenReview }) => {
 
     return (
 
-
         <Box sx={styled}>
             <Typography id="modal-modal-title" variant="h3" component="h2">
                 <HeadingMethod>Post review</HeadingMethod>

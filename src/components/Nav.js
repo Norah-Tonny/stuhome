@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 import React, { useEffect, useState, useContext } from "react";
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, getDocs, doc, getDoc } from "firebase/firestore";
 import { db } from "../Firebase";
 import { Context } from "../State";
 import { Navigate } from "react-router-dom";
@@ -53,7 +53,6 @@ height:160px;
 border-radius:50%;
 margin-top:4em;
 `
-
 const Button = styled.button`
 padding:.5em 1em;
 font-size:1rem;
@@ -83,7 +82,6 @@ const Nav = () => {
     //     checkLogin()
     // }, []);
 
-
     console.log(hostels)
     useEffect(() => {
         (async () => {
@@ -100,7 +98,6 @@ const Nav = () => {
         }
         )()
 
-
     }, [])
 
 
@@ -111,14 +108,36 @@ const Nav = () => {
         setItem(hostels[itemIndex])
     }, [docId])
 
-
     useEffect(() => {
 
         const loggedInUser = JSON.parse(localStorage.getItem("user"));
         console.log(loggedInUser)
+
         if (loggedInUser) {
-            setUser(loggedInUser)
+
             setDetails(prev => ({ ...prev, uid: loggedInUser.uid }))
+
+        }
+
+        if (loggedInUser) {
+            (async () => {
+                const docRef = doc(db, "users", loggedInUser.email);
+                const docSnap = await getDoc(docRef);
+                console.log(docSnap)
+
+                if (docSnap.exists()) {
+                    console.log("Document data:", docSnap.data());
+                    setUser(docSnap.data())
+
+                } else {
+                    // doc.data() will be undefined in this case
+                    console.log("No such document!");
+                }
+            }
+            )()
+
+            console.log(loggedInUser.email)
+
         }
 
 
@@ -143,26 +162,47 @@ const Nav = () => {
                 {/* {!isLoggedIn? (): ()}  */}
 
                 {
-                !isLoggedIn ? <NavRight>
-                    <NavUl>
-                    <NavList> <Link to="/login">Login</Link></NavList>
-                    <NavList><Link to="/signup">SignUp</Link> </NavList>
-                    <NavList><Link to="/help">Help</Link> </NavList>
-                </NavUl>
-                </NavRight>
-                    : <NavRight>
+                    isLoggedIn && user.select == "Landloard" && <NavRight>
+                        <NavUl>
 
-                    <NavUl>
-                        <NavList1>
-                        <Link to="/dashboard"> <NavList>Dashboard</NavList></Link>
-                            <Link to="/Listing"> <Button onClick={() => setIsOpen(true)} >Add Listing</Button></Link>
-                               <Link to ="/logout"><Button onClick={() => setIsLoggedIn(false)} onClick={() => setIsOpen(true)} >Log out</Button></Link> 
-                                
-                        </NavList1>
-                    </NavUl>
+
+                            <NavList1>
+                                <Link to="/dashboard"> <NavList>Dashboard</NavList></Link>
+                                <Link to="/Listing"> <Button onClick={() => setIsOpen(true)} >Add Listing</Button></Link>
+                                <Link to="/logout"><Button onClick={() => setIsLoggedIn(false)}>Log out</Button></Link>
+
+                            </NavList1>
+
+                        </NavUl>
+                    </NavRight>
+
+                }
+
+                {console.log(user.select)}
+
+                {(isLoggedIn && user.select == "Student") &&
+                    <NavRight>
+                        {console.log(user.select)}
+                        <NavUl>
+                            <NavList1>
+                                <Link to="/dashboard"> <NavList>Dashboard</NavList></Link>
+                                <Link to="/Listing"> <Button onClick={() => setIsOpen(true)} >Stude</Button></Link>
+                                <Link to="/logout"><Button onClick={() => setIsLoggedIn(false)}>Log out</Button></Link>
+
+                            </NavList1>
+                        </NavUl>
                     </NavRight>
                 }
-                
+
+                {
+                    !isLoggedIn && <NavUl>
+                        <NavList> <Link to="/login">Login</Link></NavList>
+                        <NavList><Link to="/signup">SignUp</Link> </NavList>
+                        <NavList><Link to="/help">Help</Link> </NavList>
+                    </NavUl>
+                }
+
+
             </InnerNav >
 
         </NavContainer >

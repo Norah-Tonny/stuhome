@@ -8,9 +8,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 // import { Map, GoogleApiWrapperMarker } from 'google-maps-react';
 const ContactContainer = styled.div`
 background:whitesmoke;
-
 `
-
 const ContactInput = styled.input`
 width:200%;
 box-shadow:0 0 3px 1px gray;
@@ -63,7 +61,6 @@ text-align:center;
 border:2px solid #CD5888;
 margin:0 auto;
 align-items:center;
-
  `
 
 const ContactPara = styled.p`
@@ -98,8 +95,7 @@ const Contact = () => {
             <ContactMessage type="message" placeholder="Your message" ></ContactMessage>
 
         </Inputs>
-        
-
+    
           <ContactList>
             <Icons>
             <Icon>
@@ -142,11 +138,9 @@ const Contact = () => {
 
               </ContactDetails>
 
-       
-        
       <ContactButton>Submit</ContactButton>
       </InnerContainer>
-      
+    
 
       {/* render() {
     return (

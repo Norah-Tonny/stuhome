@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { db } from "../Firebase";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, setDoc, doc } from "firebase/firestore";
 import { Link } from "@mui/material";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
@@ -12,13 +12,10 @@ import { Context } from "../State";
 
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
-
 const SignUpItemsContainer = styled.div`
  gap:6em; 
  background:whitesmoke;
  text-align:center;`;
-
-
 
 const SignUpHeading = styled.h1``;
 
@@ -134,37 +131,8 @@ const SignUpItems = () => {
         return setError("Select one");
       }
 
-
-
-
-
-      await addDoc(collection(db, "user"), values);
-      setValues({
-        FirstName: "",
-        LastName: "",
-        Contact: "",
-        select: "",
-        Email: "",
-        Password: "",
-      });
-
-    }
-
-    catch (error) {
-      console.log(error);
-    }
-
-  };
-
-
-
-
-
-
-  function handleUser(e) {
-
-    e.preventDefault()
-    createUserWithEmailAndPassword(auth, email, password)
+      const {Email, Password} = values
+      createUserWithEmailAndPassword(auth, Email, Password)
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
@@ -182,10 +150,28 @@ const SignUpItems = () => {
         console.log(errorMessage)
         // ..
       });
-  }
 
+      const usersRef = collection(db, "users");
 
+      await setDoc(doc(usersRef, values.Email), values);
+ 
+      // await addDoc(collection(db, "user"), values);
+      // setValues({
+      //   FirstName: "",
+      //   LastName: "",
+      //   Contact: "",
+      //   select: "",
+      //   Email: "",
+      //   Password: "",
+      // });
 
+    }
+
+    catch (error) {
+      console.log(error);
+    }
+
+  };
 
   return (
 
@@ -219,14 +205,14 @@ const SignUpItems = () => {
           <SignUpInput value={values.LastName} type="text" placeholder="Last Name" onChange={(e) => { setValues({ ...values, LastName: e.target.value }) }} />
 
           <SignUpInput value={values.Contact} type="contact" placeholder="Contact" onChange={(e) => { setValues({ ...values, Contact: e.target.value }) }} />
-          <SignUpInput type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+          <SignUpInput type="email" placeholder="Email" onChange={(e) =>setValues(prev => ({ ...prev, Email: e.target.value }))} />
 
         </Inputs>
 
 
         <PasswordContainer>
           <InputShowFlex>
-            <PasswordInput type={showIcon ? "text" : 'password'} placeholder='Password' onChange={(e) => setPassword(e.target.value)} />
+            <PasswordInput type={showIcon ? "text" : 'password'} placeholder='Password' onChange={(e) => setValues(prev => ({ ...prev, Password: e.target.value }))} />
             <ShowPassword onClick={() => setShowIcon(prev => !prev)}>{showIcon ? <VisibilityIcon /> : <VisibilityOffIcon />}</ShowPassword>
 
           </InputShowFlex>
@@ -235,7 +221,7 @@ const SignUpItems = () => {
         <P style={{ color: "red" }}>{error}</P>
 
         <SignUpSubmit>
-          <Link to="/login"><Button onClick={(e) => handleUser(e)}>Sign Up</Button></Link>
+          <Link to="/login"><Button onClick={(e) => handleRegister(e)}>Sign Up</Button></Link>
 
 
         </SignUpSubmit>

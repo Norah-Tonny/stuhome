@@ -126,6 +126,20 @@ const Dashboard = () => {
     return index === hostels.findIndex(o => obj.About === o.About);
   });
 
+//   const DeleteItems  = await fetch(
+//     // `https://biddingbackend.onrender.com/api/post/${id}`,
+//     {
+//       method: "DELETE",
+//     }
+//   );
+
+//   console.log(await hostels());
+ 
+// } catch (err) {
+//   console.log(err);
+// }
+
+
   
   
   return (
@@ -168,7 +182,7 @@ const Dashboard = () => {
       
                             <Link to='/listing'> <Buttons>Delete</Buttons></Link>
 
-                            <Link to=""> <Button>Cancel</Button></Link>
+                            <Link to="/"> <Button>Cancel</Button></Link>
 
                           </BookButtons>
                         </DashboardContent>

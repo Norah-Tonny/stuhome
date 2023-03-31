@@ -74,7 +74,6 @@ const BookingModal = ({ isOpen, setIsOpen }) => {
 
             const url = "https://mpesampesa.onrender.com/api/stk/push"
 
-
             const options = {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },

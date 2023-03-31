@@ -8,7 +8,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Context } from "../State";
 import { auth } from "../Firebase";
-
+import { Navigate } from "react-router-dom";
 
 const LoginContainer = styled.div`
 background:whitesmoke;
@@ -139,7 +139,6 @@ const LoginItems = () => {
   const [password, setPassword] = passwordState;
   const [isLoggedIn, setIsLoggedIn] = userOn
 
-
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -169,13 +168,12 @@ const LoginItems = () => {
           console.log(user)
           if (user) {
             setIsLoggedIn(true)
+
           }
           localStorage.setItem("user", JSON.stringify(user))
 
           console.log(error);
         })
-
-
     }
     catch (error) {
       console.log("error fill in the correct information", error);
@@ -198,6 +196,7 @@ const LoginItems = () => {
               <InputShowFlex>
                 <PasswordInput type={show ? "text" : 'password'} placeholder='Password' onChange={(e) => setValues(prev => ({ ...prev, password: e.target.value }))} />
                 <ShowPassword onClick={() => setShow(prev => !prev)}>{show ? <VisibilityIcon /> : <VisibilityOffIcon />}</ShowPassword>
+                {isLoggedIn && <Navigate to="/listing" />}
 
               </InputShowFlex>
             </PasswordContainer>
@@ -205,13 +204,7 @@ const LoginItems = () => {
 
           </Inputs>
 
-
-          {/* <LoginCheck>
-            <LoginInput type="checkbox" />Remember me.
-            <LoginPara>Forgot Password?</LoginPara>
-          </LoginCheck> */}
-
-          <Link to="/listing"><Button onClick={handleLogin}>Login</Button></Link>
+          <Link to="/"><Button onClick={handleLogin}>Login</Button></Link>
 
         </Form>
       </LoginDetails>
@@ -219,7 +212,6 @@ const LoginItems = () => {
       <LoginLeft>
         <Paragraph> Host your stuhome.</Paragraph>
       </LoginLeft>
-
 
     </LoginContainer>
 

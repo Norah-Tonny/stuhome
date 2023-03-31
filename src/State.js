@@ -24,7 +24,8 @@ const State = ({ children }) => {
         Requirements: "",
         Anemities: "",
         Rules: "",
-        About: ""
+        About: "",
+        uid:""
 
     })
 
