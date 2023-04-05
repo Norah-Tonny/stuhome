@@ -123,6 +123,7 @@ const SingleItem = () => {
         <ScheduleModal
           openSchedule={openSchedule}
           setOpenSchedule={setOpenSchedule}
+          item = {item}
         />
       )}
       {openReview && (

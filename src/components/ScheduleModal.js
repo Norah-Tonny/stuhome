@@ -1,10 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { useState } from 'react'
-// import addNotification from 'react-push-notification';
-//  import { Notifications } from 'react-push-notification';
-
+import { useState, useEffect } from 'react'
 
 const Button = styled.button`
 padding:1em ;
@@ -64,18 +61,52 @@ left:50%;
 transform:translate(-50%,-50%) ;
 `
 
-function ScheduleModal({ openSchedule, setOpenSchedule }) {
-    // const successNotification = ()=>{
-    //     addNotification({
-    //     //   title: 'Success',
-    //       title: 'You have successfully set a schedule ',
-    //       message: 'Welcome to stuhome',
-    //       theme: 'light',
-    //       closeButton:"X",
-    //       backgroundTop:"green",
-    //       backgroundBottom:"yellowgreen"
-    //     })
-    //   };
+function ScheduleModal({ openSchedule, setOpenSchedule, item }) {
+
+
+    const [newSchedule, setNewSchedule] = useState({
+        date: "",
+        time: ""
+      
+    });
+
+
+    const [schedule, setSchedule] = useState({
+       
+        phoneNumber: "",
+        message: `You've scheduled to visit ${item.Hostel} on ${newSchedule.date && newSchedule.date} at ${newSchedule.time && newSchedule.time}`
+
+    });
+
+    useEffect(() => {
+
+    }, [])
+
+
+
+
+    const [message, setMessage] = useState({
+        message: ""
+    })
+
+    setSchedule(prev => ({ ...prev, message: `` }))
+
+    const payVisit = () => {
+
+        console.log(schedule)
+        console.log(newSchedule)
+
+        // const url = "http://localhost:3000/send"
+
+        // const options = {
+        //     method: "POST",
+        //     headers: { "Content-Type": "application/json" },
+        //     body: JSON.stringify()
+        // }
+
+
+
+    }
 
     return (
         <Box sx={styled}>
@@ -87,11 +118,11 @@ function ScheduleModal({ openSchedule, setOpenSchedule }) {
             </Typography>
 
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                <Input type="date" placeholder="write the date" />
-                <Input type="time" placeholder="write time" />
-                <Input placeholder="enter your contact" />
+                <Input type="date" placeholder="write the date" onChange={(e) =>  setNewSchedule({ ...newSchedule, date: e.target.value })} />
+                <Input type="time" placeholder="write time" onChange={(e) => setNewSchedule({ ...newSchedule, time: e.target.value })} />
+                <Input placeholder="enter your phone number" onChange={(e) => setSchedule({ ...schedule, phoneNumber: `+254${e.target.value.substring(1)}` })} />
                 <ButtonConfirm>
-                    <Button >Pay a visit</Button>
+                    <Button onClick={payVisit} >Pay a visit</Button>
                 </ButtonConfirm>
                 <Buttons onClick={() => setOpenSchedule(false)}>Cancel</Buttons>
 

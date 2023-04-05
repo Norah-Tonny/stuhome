@@ -67,8 +67,6 @@ display:flex;
 flex-direction:row;
 `;
 
-
-
 const HelpDetails = styled.div``;
 
 const Image = styled.img`
@@ -114,7 +112,6 @@ const Dashboard = () => {
 
   let newHostel = [];
 
-
   const { id } = useParams();
 
   useEffect(() => {
@@ -126,7 +123,7 @@ const Dashboard = () => {
     return index === hostels.findIndex(o => obj.About === o.About);
   });
 
-//   const DeleteItems  = await fetch(
+//   const DeleteItems  = fetch(
 //     // `https://biddingbackend.onrender.com/api/post/${id}`,
 //     {
 //       method: "DELETE",
@@ -140,8 +137,6 @@ const Dashboard = () => {
 // }
 
 
-  
-  
   return (
     <Container>
     
@@ -157,13 +152,12 @@ const Dashboard = () => {
                   if (user.uid === hostel.uid) {
 
                     return (
-                      <Hostels id="Hostel" key={index}>
+                      <Hostels id="Hostel" key={index}>    
                         
                         <ImageContainer>
                           <Image src={hostel.Image} />
                           </ImageContainer>
-  
-                    
+           
                      <DashboardContent>
                           <Paragraph>Hostel:{item && item.Hostel}</Paragraph>
                           <Paragraph>About the hostel:{item && item.About}</Paragraph>
@@ -186,20 +180,21 @@ const Dashboard = () => {
 
                           </BookButtons>
                         </DashboardContent>
-                        
 
 
                         </Hostels>
                     );
-                 
-                    
-                    
                   }
 
-                
+                  //   else{
+                  //   return (
+                  //     <Paragraph>No post yet</Paragraph>
+                  //   )
+                 
+                  // }
+    
                 }
 
-               
               )}
             </Content>
           </ViewContainer>
