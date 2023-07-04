@@ -10,12 +10,10 @@ width:505%;
 curser:pointer;
 background:#CD5888;
 border-radius:5px;
-border:none;`
-
+border:none;` 
 const HeadingMethod = styled.h2``
 
 const Paragraph = styled.p`
-
 `
 
 const Buttons = styled.button`
@@ -47,7 +45,6 @@ const ButtonConfirm = styled.div`
 margin-right:26em;
 `
 
-
 const Box = styled.div`
 width:35%;
 padding:3em;
@@ -70,45 +67,40 @@ function ScheduleModal({ openSchedule, setOpenSchedule, item }) {
       
     });
 
-
-    const [schedule, setSchedule] = useState({
-       
-        phoneNumber: "",
-        message: `You've scheduled to visit ${item.Hostel} on ${newSchedule.date && newSchedule.date} at ${newSchedule.time && newSchedule.time}`
-
-    });
-
-    useEffect(() => {
-
-    }, [])
-
-
-
+    const [phoneNumber, setPhoneNumber] = useState("")
+    
 
     const [message, setMessage] = useState({
         message: ""
     })
 
-    setSchedule(prev => ({ ...prev, message: `` }))
+    // setSchedule(prev => ({ ...prev, message: `` }))
 
-    const payVisit = () => {
+    const payVisit = async () => {
 
-        console.log(schedule)
-        console.log(newSchedule)
+        const data = {
+            phoneNumber: phoneNumber,
+            message:`You've scheduled to visit ${item.Hostel} on ${newSchedule.date} at ${newSchedule.time}`
+        }
 
-        // const url = "http://localhost:3000/send"
+        console.log(data)
+        // console.log(newSchedule)
+      
+        const url = "http://localhost:3000/send"
 
-        // const options = {
-        //     method: "POST",
-        //     headers: { "Content-Type": "application/json" },
-        //     body: JSON.stringify()
-        // }
-
-
+        const options = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        }
+                                                                         
+        const sendData = await fetch(url, options)
+        await sendData.json()
+        .catch(err=>console.log(err))
 
     }
 
-    return (
+    return ( 
         <Box sx={styled}>
             <Typography id="modal-modal-title" variant="h3" component="h2">
                 <HeadingMethod>Pay avisit</HeadingMethod>
@@ -120,7 +112,7 @@ function ScheduleModal({ openSchedule, setOpenSchedule, item }) {
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                 <Input type="date" placeholder="write the date" onChange={(e) =>  setNewSchedule({ ...newSchedule, date: e.target.value })} />
                 <Input type="time" placeholder="write time" onChange={(e) => setNewSchedule({ ...newSchedule, time: e.target.value })} />
-                <Input placeholder="enter your phone number" onChange={(e) => setSchedule({ ...schedule, phoneNumber: `+254${e.target.value.substring(1)}` })} />
+                <Input placeholder="enter your phone number" onChange={(e) => setPhoneNumber( `+254${e.target.value.substring(1)}` )} />
                 <ButtonConfirm>
                     <Button onClick={payVisit} >Pay a visit</Button>
                 </ButtonConfirm>
@@ -130,7 +122,6 @@ function ScheduleModal({ openSchedule, setOpenSchedule, item }) {
         </Box>
 
     )
-
 }
 
 export default ScheduleModal

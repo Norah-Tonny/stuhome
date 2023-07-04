@@ -21,16 +21,22 @@ justify-content: space-between;
  padding: 1em;                           
   width: 85%;
    margin: 0 auto;
+  
  `;
 
 const LoginDetails = styled.div`
 width:30%;
+@media (max-width: 768px) {
+margin:0 auto;
+  }
 `
 const LoginHeading = styled.h1`
 font-size:1.5rem;
 font-weight:bold;
 margin-bottom:2em;`
 const Paragraph = styled.p``;
+
+
 const LoginLeft = styled.div`
 background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)),url("https://images.pexels.com/photos/4217/hotel-bed-bedroom-room.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"); 
 background-repeat: no repeat;
@@ -43,6 +49,10 @@ height:50vh;
   display: flex;
    flex-direction: column;
     justify-content: center; 
+    @media (max-width: 768px) {
+      display:none;    
+    
+      }
   `
 const Inputs = styled.div`
 display:flex;
@@ -56,6 +66,10 @@ box-shadow:0 0 3px 1px gray;
 width:100%;
 border-radius:5px;
 padding:.9em;
+@media (max-width: 768px) {
+  width:300%;
+  padding:.5em;
+    }
 `
 
 const PasswordInput = styled.input`
@@ -63,13 +77,19 @@ const PasswordInput = styled.input`
  background:whitesmoke;
   outline: none;
    border:none;
+   @media (max-width: 768px) {
+    width:500%;
+ ;
+      }
     `
 
 const ShowPassword = styled.div`
 
 width: fit-content; 
 height: fit-content;
- cursor: pointer;`
+ cursor: pointer;
+
+    `
 
 const InputShowFlex = styled.div`
 display: flex; 
@@ -84,7 +104,11 @@ curser:pointer;
 background:#CD5888;
 border-radius:5px;
 border:none;
-width:110%;
+width:105%;
+@media (max-width: 768px) {
+  width:100%;
+  padding:.8em;
+    }
 `
 
 const LoginInputs = styled.input`
@@ -93,6 +117,10 @@ border:none;
 box-shadow:0 0 3px 1px gray;
 border-radius:5px;
 padding:1.3em;
+@media (max-width: 768px) {
+width:300%;
+padding: 1em;
+  }
 `;
 
 const LoginInput = styled.input``;
@@ -128,6 +156,12 @@ flex-direction:row;
 `;
 const Form = styled.div`
 align-items:center;
+@media (max-width: 768px) {
+  width:92%;
+
+
+  }
+
 `
 const P = styled.p``;
 

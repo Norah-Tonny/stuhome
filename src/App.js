@@ -11,6 +11,8 @@ import Logout from "./components/Logout"
 import SingleItem from "./components/SingleItem";
 import State from "./State";
 import './App.css'
+import Dashboard1 from "./components/Dashboard1";
+
 
 const App = () => {
   const routeParams = useParams();
@@ -30,6 +32,7 @@ const App = () => {
         <Route path="/logout" element={<Logout />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/hostel/:id" element={<SingleItem />} />
+          <Route path="/Dashboard1"  element={<Dashboard />}/>
       </Routes>
       </BrowserRouter>
       </State>

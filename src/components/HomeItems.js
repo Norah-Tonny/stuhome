@@ -28,9 +28,14 @@ const Homepara = styled.h1`
 text-transform:uppercase;
 color:#CD5888;
 text-align:center;
- padding-top:13rem;
 font-weight:bold;
 font-size:3rem;
+margin:0 auto;
+margin-top:3.5em;
+@media (max-width: 768px) {
+font-size:2rem;
+text-align:center;
+}
 
 `
 const HomeCover = styled.div`
@@ -41,6 +46,7 @@ background-position:center;
 height:60vh;
 width:60wh;
 padding-top:3em;
+
 `
 const HomeMap = styled.div`
 display:flex;
@@ -51,6 +57,14 @@ align-itmes:center;
 flex-wrap:wrap;
 margin:0 auto;
 justify-content:space-between;
+padding-bottom:2em;
+@media (max-width: 768px) {
+  margin:0 auto;
+  flex-direction:column;
+ 
+
+ 
+  }
 
 `
 

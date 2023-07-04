@@ -4,28 +4,65 @@ import styled from "styled-components";
 const AboutItemsContainer = styled.div`
 background:whitesmoke;
 padding-bottom:3em;`
+
+
 const AboutImage = styled.div`
 background-image :url('https://images.pexels.com/photos/271816/pexels-photo-271816.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
 background-repeat:no-repeat;
 background-size:cover;
 background-position:center;
 height:50vh;`
+
+
 const AboutHeading = styled.h1`
 text-align:center;
-color:#CD5888;`
+color:#CD5888;
+
+
+@media (max-width: 768px) {
+    margin:0 auto;
+   font-size:1.5rem;
+   justify-content:center;
+   margin:.8em;
+    }`
+
+
 const AboutPara = styled.p`
 text-align:center;
 margin:1.5em;`
+
+
 const AboutContent = styled.div`
 display:flex;
-margin:3em;
-justify-content:space-around;`
+margin:3e
+justify-content:space-around;
+
+
+@media (max-width: 768px) {
+    margin:0 auto;
+    flex-direction:column;
+    gap:5em;
+   align-items:center;
+   margin-top:3em;
+    }
+
+`
+
+
+
 const AboutText = styled.div`
 width:25%;
 box-shadow:0 0 3px 1px #CD5888;
 background:lightGrey;
 border-radius:5px;
 height:100%;
+
+
+
+@media (max-width: 768px) {
+  width:70%;
+ 
+    }
 `
 const AboutItems = () => {
     return (

@@ -5,17 +5,17 @@ import { collection, addDoc, setDoc, doc } from "firebase/firestore";
 import { Link } from "@mui/material";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import { border, padding } from "@mui/system";
 import { auth } from "../Firebase";
 import { useContext } from "react";
 import { Context } from "../State";
-
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+// import useMediaQuery from "@mui/material";
 
 const SignUpItemsContainer = styled.div`
  gap:6em; 
  background:whitesmoke;
- text-align:center;`;
+ text-align:center;
+`;
 
 const SignUpHeading = styled.h1``;
 
@@ -26,6 +26,14 @@ const SignUpInput = styled.input`
   border:none;
   box-shadow:0 0 3px 1px gray;
   outline:none;
+  @media (max-width: 768px) {
+    margin-left:6em;
+      justify-content:center;
+      width:200%;
+      padding:1.5em 2em;
+    ;
+      
+        }
 `;
 
 const PasswordContainer = styled.div`
@@ -34,6 +42,13 @@ box-shadow:0 0 3px 1px gray;
 margin-top:2em;
 border-radius:5px;
 padding:1.3em;
+@media (max-width: 768px) {
+  width:59%;
+  padding:.7em;
+  margin-right:1.8em;
+    }
+  // margin-left:1.8emz;
+    }
 `
 
 const PasswordInput = styled.input`
@@ -41,13 +56,19 @@ const PasswordInput = styled.input`
   outline: none;
   background:whitesmoke;
    border:none;
+   @media (max-width: 768px) {
+    width:500%;
+   }
     `
 
 const ShowPassword = styled.div`
 
 width: fit-content; 
 height: fit-content;
- cursor: pointer;`
+ cursor: pointer;
+ @media (max-width: 768px) {
+  width:700%;
+    }`
 
 const InputShowFlex = styled.div`
 display: flex; 
@@ -72,6 +93,7 @@ display:flex;
 flex-direction:column;
 gap:2em;
 margin-right:25em;
+
 `
 
 const P = styled.p``;
@@ -80,6 +102,11 @@ const Form = styled.form`
 display:flex;
 flex-direction:column;
 align-items:center;
+@media (max-width: 768px) {
+  
+  justify-content:center;
+  
+    }
 `
 
 
@@ -131,30 +158,30 @@ const SignUpItems = () => {
         return setError("Select one");
       }
 
-      const {Email, Password} = values
+      const { Email, Password } = values
       createUserWithEmailAndPassword(auth, Email, Password)
-      .then((userCredential) => {
-        // Signed in 
-        const user = userCredential.user;
+        .then((userCredential) => {
+          // Signed in 
+          const user = userCredential.user;
 
-        console.log(user)
+          console.log(user)
 
 
-        alert("succesfully registered")
-        // ...
-      })
+          alert("succesfully registered")
+          // ...
+        })
 
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorMessage)
-        // ..
-      });
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorMessage)
+          // ..
+        });
 
       const usersRef = collection(db, "users");
 
       await setDoc(doc(usersRef, values.Email), values);
- 
+
       // await addDoc(collection(db, "user"), values);
       // setValues({
       //   FirstName: "",
@@ -191,10 +218,11 @@ const SignUpItems = () => {
             borderRadius: "5px",
             border: "none",
             boxShadow: "0 0 3px 1px gray",
-            outline: "none"
+            outline: "none",
+
           }}>
-          <option value="">Are you a student or a landlord?</option>
-          <option value="Student">student</option>
+          <option value="">Student/Landlord?</option>
+          <option value="Student">Student</option>
           <option value="Landloard">Landlord</option>
 
         </select>
@@ -205,7 +233,7 @@ const SignUpItems = () => {
           <SignUpInput value={values.LastName} type="text" placeholder="Last Name" onChange={(e) => { setValues({ ...values, LastName: e.target.value }) }} />
 
           <SignUpInput value={values.Contact} type="contact" placeholder="Contact" onChange={(e) => { setValues({ ...values, Contact: e.target.value }) }} />
-          <SignUpInput type="email" placeholder="Email" onChange={(e) =>setValues(prev => ({ ...prev, Email: e.target.value }))} />
+          <SignUpInput type="email" placeholder="Email" onChange={(e) => setValues(prev => ({ ...prev, Email: e.target.value }))} />
 
         </Inputs>
 

@@ -15,14 +15,24 @@ box-shadow:0 0 3px 1px gray;
 border:none;
 border-radius:5px;
 padding:1.5em;`
+
+
 const Paragraph = styled.p`
 margin-right:2em;`
 
 const Paragraph1 = styled.h3`
 margin-right:7em;
 gap:2em;`
+
+
+
 const ContactList = styled.div`
 margin-right:30em;
+
+@media (max-width: 768px) {
+  margin:0 auto;
+  justisfy-content:center;
+}
 `
 
 const ContactButton = styled.button`
@@ -42,39 +52,69 @@ border:grey;
 border-radius:5px;
 box-shadow:0 0 3px 1px gray;
 padding:2em;
-border`
+border
+
+`
 
 const ContactHeading = styled.h2`
 margin-right:20em;
+
+@media (max-width: 768px) {
+  margin:0 auto;
+  jtext-align:center;
+  }
 `
 
 const Inputs = styled.div`
-  display:flex;
+display:flex;
 flex-direction:column;
  gap:2em;
  margin:0 auto;
-
  `
 const InnerContainer = styled.div`
 padding:2em;
 text-align:center;
-border:2px solid #CD5888;
 margin:0 auto;
 align-items:center;
+
+@media (max-width: 768px) {
+  margin:0 auto;
+  flex-direction:column;
+ 
+  }
  `
 
 const ContactPara = styled.p`
-margin-right:30em;`
+margin-right:30em;
+
+@media (max-width: 768px) {
+  margin:0 auto;
+  font-size:1.3rem;
+  text-align:center;
+
+  }`
 
 const ContactDetails = styled.div`
   display:flex;
 align-items:center;
 margin:3em;
 
+@media (max-width: 768px) {
+  margin:0 auto;
+  flex-direction:column;
+  justisfy-content:center ;
+}
+
 `
 const Icons = styled.div`
 display:flex;
-gap:2em;`
+gap:2em;
+
+@media (max-width: 768px) {
+display:none;
+ 
+  }`
+
 const Icon = styled.div``
 
 const Content = styled.div``

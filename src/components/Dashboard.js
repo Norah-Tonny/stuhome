@@ -62,10 +62,10 @@ const Hostels = styled.div`
   gap:5em;
   padding: 3em;
 `;
-const Hostel = styled.div`
-display:flex;
-flex-direction:row;
-`;
+// const Hostel = styled.div`
+// display:flex;
+// flex-direction:column;
+// `;
 
 const HelpDetails = styled.div``;
 
@@ -80,6 +80,9 @@ const Content = styled.div`
   background: #fff;
 `;
 const ImageContainer = styled.div``
+
+
+
 const DashboardContent = styled.div`
 border: 2px solid lightGrey;
 border0-radius:5px;
@@ -145,7 +148,9 @@ const Dashboard = () => {
       ) : (
         <>
           <Nav />
-          <ViewContainer>
+            <ViewContainer>
+              
+
               <Content>
               {unique.map(
                 (hostel, index) => {
@@ -160,32 +165,39 @@ const Dashboard = () => {
            
                      <DashboardContent>
                           <Paragraph>Hostel:{item && item.Hostel}</Paragraph>
-                          <Paragraph>About the hostel:{item && item.About}</Paragraph>
                           <Paragraph>Location:{hostel.Location}</Paragraph>
+                          
+                     <Paragraph>About the hostel:{item && item.About}</Paragraph>
                           <Paragraph>Ksh.{hostel.Pricing}</Paragraph>
                           <Paragraph>Position:{item && item.Position}</Paragraph>
                           <Paragraph>Agent:{item && item.Agent}</Paragraph>
                           <Paragraph>Location:Gender{item && item.Location}</Paragraph>
                           <Paragraph>Requirements:{item && item.Requirements}</Paragraph>
                           <Paragraph>Anemities:{item && item.Anemities}</Paragraph>
-                          <Paragraph>Rules:{item && item.Rules}</Paragraph>
-      
+                          <Paragraph>Rules:{item && item.Rules}</Paragraph> 
                           <BookButtons>
       
-                            <Link to='/listing'>  <Buttons >Update</Buttons></Link>
-      
-                            <Link to='/listing'> <Buttons>Delete</Buttons></Link>
+      <Link to='/listing'>  <Buttons >Update</Buttons></Link>
 
-                            <Link to="/"> <Button>Cancel</Button></Link>
+      <Link to='/listing'> <Buttons>Delete</Buttons></Link>
 
-                          </BookButtons>
+      <Link to="/"> <Button>Cancel</Button></Link>
+
+    </BookButtons>
                         </DashboardContent>
+   
+
 
 
                         </Hostels>
-                    );
+                    )
+                  
+                  
                   }
 
+
+
+            
                   //   else{
                   //   return (
                   //     <Paragraph>No post yet</Paragraph>

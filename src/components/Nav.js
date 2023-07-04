@@ -25,6 +25,9 @@ gap:2em;
 font-weight:bold;
 list-style-type:none;
 margin-top:4em;
+@media (max-width: 768px) {
+    display:none;
+  }
 `
 
 const NavList = styled.li`
@@ -39,12 +42,19 @@ color:black;
 font-weight:bold;
 display:flex;
 gap:3em;
-flex-direction:row;`
+flex-direction:row;
+
+`
 
 const Logo = styled.h1`
 padding-left:.5em;
 font-weight:bold;
 font-size:1.5rem;
+@media (max-width: 768px) {
+    text-align:center;
+    margin:0 auto;
+    }
+
 `
 
 const LogoContainer = styled.div`
@@ -52,6 +62,8 @@ width:160px;
 height:160px;
 border-radius:50%;
 margin-top:4em;
+
+  
 `
 const Button = styled.button`
 padding:.5em 1em;
@@ -76,11 +88,8 @@ const Nav = () => {
     const [item, setItem] = itemState
     const [loader, setLoader] = loaderState
     const [details, setDetails] = detailsState
-    // const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = userOn
-    // useEffect(() => {
-    //     checkLogin()
-    // }, []);
+  
 
     console.log(hostels)
     useEffect(() => {
@@ -91,7 +100,7 @@ const Nav = () => {
                 setHostels(prev => ([...prev, doc.data()]))
                 setDocId(prev => [...prev, doc.id])
 
-                // console.log(doc.id)
+    
 
             });
             setLoader(false)
@@ -104,7 +113,7 @@ const Nav = () => {
     useEffect(() => {
 
         const itemIndex = docId.indexOf(itemId)
-        // console.log(docId)
+     
         setItem(hostels[itemIndex])
     }, [docId])
 
@@ -159,11 +168,11 @@ const Nav = () => {
                     </LogoContainer>
                 </NavLeft>
 
-                {/* {!isLoggedIn? (): ()}  */}
+              
 
                 {
                     isLoggedIn && user.select == "Landloard" && <NavRight>
-                        <NavUl>
+                        <NavUl className="nav-items">
 
 
                             <NavList1>

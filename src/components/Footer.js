@@ -9,6 +9,13 @@ background:#CD5888;
 display:flex;
 justify-content:space-between;
 padding:2em;
+@media (max-width: 768px) {
+  width:88%;
+  flex-direction:column;
+  text-align:center;
+
+  }
+
 `
 const FooterUl = styled.ul`
 
@@ -32,6 +39,12 @@ font-weight:bold;`
 const Logo = styled.h1`
 text-align:center;
 font-size:1.5em;
+
+@media (max-width: 768px) {
+  width:100%;
+  text-align:center;
+  }
+
 `
 
 const FooterPara = styled.p`
@@ -53,8 +66,8 @@ const Footer = () => {
 
         <Link to='/about'><FooterLink>About</FooterLink></Link>
         <Link to='/contact'> <FooterLink>Contact</FooterLink></Link>
-
-
+        {/* <Link  to ='/`Dashboard1'><Footer>Dashboard1</Footer></Link> */}
+`
       </FooterUl>
 
       <FooterUl>

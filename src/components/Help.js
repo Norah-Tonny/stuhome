@@ -4,24 +4,45 @@ import Nav from "./Nav";
 import Footer from "./Footer";
 
 const Container = styled.div``
-const HelpContent=styled.div``
+const HelpContent = styled.div`
+@media (max-width: 768px) {
+  margin:0 auto;
+  justify-content:center;
+  flex-direction:column;
+ 
+  }`
 
 const HelpContainer = styled.div`
 display:flex;
 flex:row;
 gap:5em;
 margin:0 auto;
+
+@media (max-width: 768px) {
+  justify-content:center;
+  flex-direction:column;
+ gap:1.5em;
+
+  }
 `
 const HelpText = styled.div`
 display:flex;
 flex-direction:column;`
 
 const HelpHeading = styled.h4`
+@media (max-width: 768px) {
+  text-align:center;
+margin:1em;
+
+  }
 `
 const Para = styled.p`
 `
 const HelpPara = styled.p`
+@media (max-width: 768px) {
+margin-left:.5em;
 
+  }
 `
 
 
@@ -31,6 +52,11 @@ background-repeat: no repeat;
  background-size: cover;                                                                                                                                                               
 width: 50%;
 height:50vh;
+
+@media (max-width: 768px) {
+width:100%;
+
+  }
 
 `   
 const HelpParagraph=styled.div``
