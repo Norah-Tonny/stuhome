@@ -1,13 +1,26 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { json, Link } from "react-router-dom";
 import { Context } from '../State';
 
-const LogoutContainer = styled.div``
+const Box = styled.div`
+width:35%;
+padding:3em;
+margin:0 auto;
+border-radius:10px;
+background:white;
+border:2px solid  lightGrey;
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);`
 
-const Paragraph = styled.p`
-font-size:1em;
-margin-right:3em;`
+const Typography = styled.div``
+
+const HeadingMethod = styled.h2`
+text-align:center;
+margin-bottom:1em;`
+
 
 const Button = styled.button`
 padding:1em 2em;
@@ -26,23 +39,29 @@ flex-direction:row;
 `
 
 
-const Logout = () => {
+const Logout = ({ isOpen, setIsOpen }) => {
   
   const context = useContext(Context)
   const { userOn } = context
   const[isLoggedIn, setIsLoggedIn]=userOn
 
   return (
-    <LogoutContainer>
-      <Paragraph>Are you sure you want to log out?</Paragraph>
+    <Box>
+ <Typography id="modal-modal-title" variant="h3" component="h2">
+                <HeadingMethod>Are you sure you want to login?</HeadingMethod>
+      </Typography>
+
       <Buttons>
         <Link to="/"><Button onClick={()=>setIsLoggedIn(false)}>Yes</Button></Link>
        <Link to="/"><Button>No</Button></Link>
         </Buttons>
 
-    </LogoutContainer>
+    </Box>
   )
 }
 
 
 export default Logout
+
+
+

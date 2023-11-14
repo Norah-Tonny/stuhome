@@ -66,8 +66,8 @@ const Footer = () => {
 
         <Link to='/about'><FooterLink>About</FooterLink></Link>
         <Link to='/contact'> <FooterLink>Contact</FooterLink></Link>
-        {/* <Link  to ='/`Dashboard1'><Footer>Dashboard1</Footer></Link> */}
-`
+        <Link  to ='/place'><FooterLink>Place</FooterLink>
+`</Link>
       </FooterUl>
 
       <FooterUl>

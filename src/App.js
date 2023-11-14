@@ -12,6 +12,7 @@ import SingleItem from "./components/SingleItem";
 import State from "./State";
 import './App.css'
 import Dashboard1 from "./components/Dashboard1";
+import Place from "./components/Place";
 
 
 const App = () => {
@@ -32,7 +33,9 @@ const App = () => {
         <Route path="/logout" element={<Logout />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/hostel/:id" element={<SingleItem />} />
-          <Route path="/Dashboard1"  element={<Dashboard />}/>
+          <Route path="/Dashboard1" element={<Dashboard />} />
+          <Route path="/Place"  element={<Place />}/>
+
       </Routes>
       </BrowserRouter>
       </State>

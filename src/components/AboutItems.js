@@ -33,7 +33,7 @@ margin:1.5em;`
 
 
 const AboutContent = styled.div`
-display:flex;
+display:flex ;
 margin:3e
 justify-content:space-around;
 
@@ -93,16 +93,9 @@ const AboutItems = () => {
                     <AboutPara>they are in.</AboutPara>
                 </AboutText>
 
-                <AboutText>
-                    <AboutHeading>Our Goals</AboutHeading>
-                    <AboutPara>To reach out to many collages and universities student </AboutPara>
-                    <AboutPara> aroundby providing them with efficient and comfort</AboutPara>
-                    <AboutPara> acommodation.</AboutPara>
-                </AboutText>
-
-            </AboutContent>
-
+             
+                </AboutContent>
         </AboutItemsContainer>
     )
 }
-export default AboutItems;
+export default AboutItems;       
